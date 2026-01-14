@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getMediaAppearances, urlFor } from '../lib/sanity';
+
+const appearances = await getMediaAppearances();
+
+const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+};
+---
+
+<BaseLayout title="Press & Media | Marshall Schurtz" description="Media appearances, press coverage, and interviews featuring Marshall Schurtz.">
+  <div class="container mx-auto px-4 py-12 md:py-24">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Header -->
+      <div class="mb-16">
+        <a href="/" class="inline-flex items-center gap-2 text-sm font-mono text-gray-500 hover:text-[var(--color-brand-orange)] transition-colors mb-8">
+          ← BACK TO HOME
+        </a>
+        
+        <div class="flex items-center gap-4 mb-6">
+          <span class="w-2 h-2 bg-brand-orange"></span>
+          <h1 class="font-mono text-sm tracking-[0.2em] text-brand-orange uppercase">
+            // Press & Media
+          </h1>
+          <div class="h-px bg-brand-orange/30 flex-grow"></div>
+        </div>
+        
+        <h2 class="text-3xl md:text-5xl font-sans font-medium text-[var(--color-off-white)] mb-6">
+          In The Media
+        </h2>
+        <p class="text-gray-400 max-w-2xl">
+          Featured articles, interviews, and media coverage of my work in archaeology, storytelling, and urban exploration.
+        </p>
+      </div>
+
+      <!-- Media Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {appearances.length > 0 ? appearances.map((item: any) => (
+          <a 
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block bg-bedrock border border-concrete/20 hover:border-brand-orange transition-all duration-300 overflow-hidden"
+          >
+            {/* Cover Image */}
+            {item.coverImage ? (
+              <div class="aspect-video relative overflow-hidden">
+                <img 
+                  src={urlFor(item.coverImage).width(600).height(340).fit('crop').url()}
+                  alt={item.title}
+                  class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                />
+                {/* Logo overlay - bottom right */}
+                {item.logo && (
+                  <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded">
+                    <img 
+                      src={urlFor(item.logo).width(80).height(30).fit('max').url()}
+                      alt={item.outlet || 'Media outlet'}
+                      class="h-5 w-auto object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div class="aspect-video bg-gradient-to-br from-bedrock to-concrete/20 flex items-center justify-center relative">
+                <span class="font-mono text-4xl text-concrete/30">📰</span>
+                {/* Logo overlay when no cover image */}
+                {item.logo && (
+                  <div class="absolute bottom-3 right-3 bg-white/90 p-2 rounded">
+                    <img 
+                      src={urlFor(item.logo).width(80).height(30).fit('max').url()}
+                      alt={item.outlet || 'Media outlet'}
+                      class="h-5 w-auto object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Content */}
+            <div class="p-6">
+              {/* Outlet name */}
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono text-xs text-brand-orange uppercase tracking-wider">
+                  {item.outlet || 'PRESS'}
+                </span>
+                <svg class="w-4 h-4 text-concrete group-hover:text-brand-orange transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </div>
+              
+              {/* Title */}
+              <h3 class="text-off-white font-bold mb-3 leading-snug group-hover:text-brand-orange transition-colors line-clamp-2">
+                {item.title}
+              </h3>
+
+              {/* Excerpt */}
+              {item.excerpt && (
+                <p class="text-concrete text-sm font-mono leading-relaxed mb-4 line-clamp-2">
+                  "{item.excerpt}"
+                </p>
+              )}
+              
+              {/* Date */}
+              <time class="text-xs font-mono text-concrete/70 block">
+                {formatDate(item.date)}
+              </time>
+            </div>
+          </a>
+        )) : (
+          <div class="col-span-full py-24 text-center">
+            <p class="text-concrete font-mono text-sm mb-4">// NO MEDIA APPEARANCES FOUND</p>
+            <p class="text-gray-500 text-sm">Check back soon for press coverage and media appearances.</p>
+          </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
