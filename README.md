@@ -1,43 +1,135 @@
-# Astro Starter Kit: Minimal
+# Marshall Schurtz Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+Personal portfolio website for Marshall Schurtz — Founder, Archaeologist, Storyteller, Strategist.
+
+## 🔗 Live URLs
+
+| Service | URL |
+|---------|-----|
+| **Production Site** | *Deploy to Vercel (see below)* |
+| **Sanity Studio** | [marshall-portfolio.sanity.studio](https://marshall-portfolio.sanity.studio/) |
+| **GitHub Repo** | [github.com/marshallschurtz/marshall-portfolio](https://github.com/marshallschurtz/marshall-portfolio) |
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Astro](https://astro.build) v5
+- **UI Components**: [Svelte](https://svelte.dev) v5
+- **Styling**: [TailwindCSS](https://tailwindcss.com) v4
+- **CMS**: [Sanity](https://sanity.io)
+- **Animations**: [GSAP](https://gsap.com)
+- **Hosting**: Vercel (site) + Sanity Studio (CMS)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- npm or pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/marshallschurtz/marshall-portfolio.git
+cd marshall-portfolio
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Development
 
-## 🚀 Project Structure
+```bash
+# Start the dev server
+npm run dev
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+# Site runs at http://localhost:4321
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Sanity Studio (Local)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+cd sanity
+npm install
+npm run dev
 
-Any static assets, like images, can be placed in the `public/` directory.
+# Studio runs at http://localhost:3333
+```
+
+## 📦 Deployment
+
+### Deploy to Vercel
+
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Import the GitHub repo: `marshallschurtz/marshall-portfolio`
+3. Add the following **Environment Variables**:
+
+| Variable | Description |
+|----------|-------------|
+| `PUBLIC_SANITY_PROJECT_ID` | Sanity project ID: `mkro68w7` |
+| `PUBLIC_SANITY_DATASET` | Sanity dataset: `production` |
+| `PUBLIC_YOUTUBE_API_KEY` | YouTube Data API key |
+| `PUBLIC_YOUTUBE_CHANNEL_ID` | YouTube channel ID |
+
+4. Click **Deploy**
+
+### Deploy Sanity Studio
+
+```bash
+cd sanity
+npx sanity login
+npx sanity deploy
+```
+
+Studio is deployed to: [marshall-portfolio.sanity.studio](https://marshall-portfolio.sanity.studio/)
+
+### Connect Custom Domain (Cloudflare)
+
+1. In Vercel → Project Settings → Domains
+2. Add your domain (e.g., `marshallschurtz.com`)
+3. In Cloudflare DNS:
+   - Add `CNAME` record pointing to `cname.vercel-dns.com`
+   - Set proxy to **OFF** (gray cloud) initially
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+| Command | Action |
+|---------|--------|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build production site to `./dist/` |
+| `npm run preview` | Preview build locally |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 📁 Project Structure
 
-## 👀 Want to learn more?
+```
+/
+├── public/              # Static assets (images, PDFs, etc.)
+├── sanity/              # Sanity CMS Studio
+├── src/
+│   ├── components/      # Astro & Svelte components
+│   ├── layouts/         # Page layouts
+│   ├── lib/             # Utilities (Sanity client, animations)
+│   ├── pages/           # Routes
+│   └── styles/          # Global CSS
+├── .env.example         # Environment variable template
+└── astro.config.mjs     # Astro configuration
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🔐 Environment Variables
+
+Copy `.env.example` to `.env` and fill in:
+
+```bash
+PUBLIC_SANITY_PROJECT_ID=mkro68w7
+PUBLIC_SANITY_DATASET=production
+PUBLIC_YOUTUBE_API_KEY=your_youtube_api_key
+PUBLIC_YOUTUBE_CHANNEL_ID=your_channel_id
+```
+
+## 📝 License
+
+Private repository. All rights reserved.
