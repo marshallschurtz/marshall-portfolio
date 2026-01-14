@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import WhatIDo from '../components/home/WhatIDo.astro';
+import ResumeHighlights from '../components/home/ResumeHighlights.astro';
+import AboutSection from '../components/home/AboutSection.astro';
+import YouTubeFeed from '../components/home/YouTubeFeed.svelte';
+import MediaSection from '../components/home/MediaSection.astro';
+
+// Page Metadata
+const pageTitle = "Marshall Schurtz | Founder, Archaeologist, Storyteller, Strategist";
+const pageDescription = "Documenting the modern world through an archaeological lens. Excavations, vertical exploration, and field notes.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+	<HeroSection />
+	<WhatIDo />
+	<AboutSection />
+	<ResumeHighlights />
+	<YouTubeFeed client:visible />
+	<MediaSection />
+</BaseLayout>

@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+
+// Page Metadata
+const pageTitle = "About Marshall Schurtz | Archaeologist, Storyteller, Strategist";
+const pageDescription = "From excavating ancient sites to building modern businesses. The story of Marshall Schurtz.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  
+  <!-- Hero / Intro -->
+  <section class="pt-32 pb-20 bg-bedrock relative overflow-hidden">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-4xl">
+        <span class="font-mono text-brand-orange text-xs tracking-widest uppercase mb-4 block animate-pulse">
+            // STATUS: EXCAVATING
+        </span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-off-white mb-8 leading-tight uppercase">
+          Archaeologist. <br/>
+          Content Creator. <br/>
+          <span class="text-brand-orange">Tour Guide.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-concrete font-light leading-relaxed max-w-3xl">
+          I'm Marshall Schurtz. Based in Philadelphia. <br class="hidden md:block" />
+          Exploring the world by understanding its past.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Decorative Grid Background -->
+    <div class="absolute inset-0 bg-[url('/assets/grid-pattern.svg')] opacity-5 pointer-events-none"></div>
+  </section>
+
+  <!-- The Background -->
+  <section class="py-20 bg-[#1A1A1A] border-y border-concrete/10">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        
+        <!-- Image Col -->
+        <div class="relative order-2 lg:order-1">
+            <div class="bg-neutral-900 border border-concrete/20 relative overflow-hidden group">
+              <img 
+                src="/assets/headshots/historical-arch.webp" 
+                alt="Marshall Schurtz Excavation Fieldwork" 
+                class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              />
+           </div>
+           <!-- Caption removed as requested -->
+        </div>
+
+        <!-- Text Col -->
+        <div class="order-1 lg:order-2">
+           <h2 class="text-2xl font-bold text-off-white mb-6 uppercase flex items-center gap-3">
+              <span class="w-2 h-2 bg-brand-orange"></span>
+              The Background
+           </h2>
+           <div class="prose prose-invert prose-lg text-concrete font-light">
+             <p>
+               For ten years, I studied the ancient Near East at the University of Pennsylvania. I spent summers excavating Bronze and Iron Age sites in Iraq and Lebanon, and wrote a dissertation on <strong>Musasir</strong> — a mountain kingdom most people have never heard of.
+             </p>
+             <p>
+               I loved the research. I still do. But somewhere along the way, I realized I love archaeology more for what it can teach us <em>today</em> than for reconstructing the past on its own terms.
+             </p>
+             <h3 class="text-off-white text-lg font-bold mt-8 mb-4 uppercase text-sm tracking-wider">Origin</h3>
+             <p class="text-base">
+               Born in Los Angeles. Undergrad in Boston (archaeology and economics). Grad school in Philadelphia.
+             </p>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- The Pivot -->
+  <section class="py-20 bg-bedrock">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+        <!-- Text Col -->
+        <div>
+           <h2 class="text-2xl font-bold text-off-white mb-6 uppercase flex items-center gap-3">
+              <span class="w-2 h-2 bg-brand-orange"></span>
+              Merakiva Travel
+           </h2>
+           <div class="prose prose-invert prose-lg text-concrete font-light">
+             <p>
+               <strong>Merakiva</strong> is my archaeological tourism consultancy. I help travelers plan trips to places most travel agents have never heard of — and wouldn't know how to evaluate if they had. I've built a database of thousands of heritage sites at <strong>archaeolist.com</strong>, and I use it to design itineraries that go beyond the obvious stops.
+             </p>
+             <p>
+               Whether it's navigating permits for sites that aren't officially open to tourists or figuring out which local guides are actually worth hiring, I bring the same research rigor I developed in academia to the logistics of travel planning.
+             </p>
+           </div>
+        </div>
+        
+        <!-- Image Col -->
+        <div class="relative">
+           <div class="aspect-square bg-neutral-900 border border-concrete/20 relative overflow-hidden group">
+              <img 
+                src="/assets/headshots/marshall_headshot_pats-steak.png" 
+                alt="Marshall Schurtz at Pat's Steaks - Tour Guide" 
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              />
+           </div>
+           
+           <!-- Floating Info Card -->
+           <div class="absolute -bottom-6 -left-6 bg-bedrock border border-concrete/20 p-4 max-w-xs shadow-2xl hidden md:block">
+              <p class="font-mono text-xs text-brand-orange mb-2">// CURRENT MISSION</p>
+              <p class="text-off-white text-sm">Turning expertise into experience through global travel.</p>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects & YouTube -->
+  <section class="py-20 bg-[#1A1A1A] border-y border-concrete/10">
+    <div class="container mx-auto px-4 md:px-8">
+      
+      <div class="max-w-4xl mx-auto space-y-16">
+        
+        <!-- Always Sunny -->
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+           <div>
+              <h3 class="text-xl font-bold text-off-white mb-4 uppercase">Always Sunny Tour</h3>
+              <p class="text-concrete text-lg leading-relaxed mb-6">
+                I created the Always Sunny Tour in 2023 because I wanted to sharpen my skills as a tour guide — and because nobody else had stepped up to show South Philly to fans of <em>It's Always Sunny in Philadelphia</em>. What started as an experiment became a legitimate business: two-plus years of tours with a perfect five-star rating, private bookings that sell out, and a website that ranks at the top of Google for anyone searching for Paddy's Pub.
+              </p>
+              <p class="text-concrete text-lg leading-relaxed">
+                I've researched deeper than anyone else has bothered to — tracking down filming locations, digging through sixteen seasons of episodes, and building a tour that rewards the die-hard fans without alienating the curious newcomers their partners drag along.
+              </p>
+           </div>
+           
+           <div class="relative order-first md:order-last">
+              <div class="aspect-video bg-neutral-900 border border-concrete/20 relative overflow-hidden group">
+                  <img 
+                    src="/assets/always-sunny/inquirer-marshall.jpg"
+                    alt="Marshall Schurtz featured in Philadelphia Inquirer"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  />
+                  
+                  <!-- Caption overlay -->
+                  <div class="absolute bottom-0 left-0 right-0 p-2 bg-black/60 backdrop-blur-sm text-xs font-mono text-concrete border-t border-concrete/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                      // PHOTO: MONICA HERNDON FOR THE PHILADELPHIA INQUIRER
+                  </div>
+              </div>
+           </div>
+        </div>
+
+        <!-- YouTube & Storytelling -->
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+            
+            <!-- Image Col (Left for visual balance) -->
+            <div class="relative">
+               <!-- Constrained width container -->
+               <div class="bg-neutral-900 border border-concrete/20 relative overflow-hidden group max-w-sm">
+                   <img 
+                     src="/assets/headshots/ancient-theater.webp"
+                     alt="Ancient Theater"
+                     class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                   />
+               </div>
+            </div>
+
+            <!-- Text Col -->
+            <div>
+               <h3 class="text-xl font-bold text-off-white mb-4 uppercase">YouTube & Storytelling</h3>
+               <p class="text-concrete text-lg leading-relaxed mb-6">
+                 I launched a YouTube channel to promote Merakiva Travel, but it's become something more: a place to tell the stories that actually excite me — whether that's critiquing a new metro line or exploring an ancient harbor most tourists walk right past.
+               </p>
+               <p class="text-concrete text-lg leading-relaxed">
+                 My approach is to sneak archaeology in through the back door. I lead with what's visually compelling or culturally relevant today, then pull in the deeper history once viewers are hooked. It's brought me back to why I fell in love with archaeology in the first place — not the digging, but the storytelling.
+               </p>
+            </div>
+        </div>
+
+        <!-- Consulting / Sweathead -->
+        <div>
+           <h3 class="text-xl font-bold text-off-white mb-4 uppercase">Strategy & Operations</h3>
+           <p class="text-concrete text-lg leading-relaxed mb-6">
+             Throughout all of this, I've worked in marketing analytics — helping companies ranging from scrappy startups to enterprise organizations streamline their data infrastructure and make sense of what they're collecting.
+           </p>
+           <p class="text-concrete text-lg leading-relaxed">
+             Most recently, I've taken a lead role at <strong>Sweathead</strong> alongside Mark Pollard, running Operations and driving our Enterprise sales pipeline. It's given me a front-row seat to how strategy gets sold — and how most companies struggle to connect insight to action. That tension between knowing and doing shows up in everything I build.
+           </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- The Through Line -->
+  <section class="py-24 bg-bedrock relative">
+    <div class="container mx-auto px-4 md:px-8 text-center">
+      
+      <div class="inline-block mb-8">
+        <svg class="w-12 h-12 text-brand-orange mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-brand-orange">The Through Line</h2>
+      </div>
+
+      <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold text-off-white max-w-4xl mx-auto leading-tight mb-12">
+        "Everything I do comes back to the same impulse: understanding the history of a place, how that history shaped what it is today, and sharing that understanding with others."
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="p-6 border border-concrete/20 bg-[#1A1A1A]">
+          <h4 class="font-bold text-off-white mb-2 uppercase">Make the complex accessible.</h4>
+        </div>
+        <div class="p-6 border border-concrete/20 bg-[#1A1A1A]">
+          <h4 class="font-bold text-off-white mb-2 uppercase">Make the distant feel close.</h4>
+        </div>
+        <div class="p-6 border border-concrete/20 bg-[#1A1A1A]">
+          <h4 class="font-bold text-off-white mb-2 uppercase">Turn expertise into experience.</h4>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

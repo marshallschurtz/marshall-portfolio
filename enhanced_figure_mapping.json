@@ -1,0 +1,113 @@
+{
+    "1": {},
+    "2": {
+        "2.2": {
+            "source_file": "Khorsabad_Salle_XIII._Bas-relief_4_-_sac_de_Musasir.jpg",
+            "caption": "Muṣaṣir Relief. Sargon II's Palace at Khorsabad, Room XIII, Slab 4"
+        }
+    },
+    "4": {
+        "4.1": {
+            "source_file": "Mudjesir_modern_building_picture.png",
+            "caption": "Traditional Building at Mudjesir"
+        },
+        "4.3": {
+            "source_file": "Building 1 colored walls.tif",
+            "caption": "Gund-i Topzawa Building 1-W Phase B Full Plan"
+        },
+        "4.4": {
+            "source_file": "AnnotatedImages/Op1_Room1_topofcollapse.png",
+            "caption": "Top-down View of Room 1, Gund-i Topzawa Building 1-W Phase B"
+        },
+        "4.5": {
+            "source_file": "Room2_Drum_Illustration - Grayscale.jpg",
+            "caption": "Room 1 Pithos (Plate 44.2)"
+        },
+        "4.6": {
+            "source_file": "1090.1-drawing.jpg",
+            "caption": "Room 1 Pithos (Plate 44.1)"
+        },
+        "4.7": {
+            "source_file": "AnnotatedImages/Room2-drums-exposedwithsection.jpg",
+            "caption": "Cross-section of Bin 1, Room 2"
+        },
+        "4.8": {
+            "source_file": "topdown_room2_withwall_transparent-walldrawn.jpg",
+            "caption": "Top-down View of Room 2, with retaining wall's position shown"
+        },
+        "4.9": {
+            "source_file": "AnnotatedImages/Room2\u00263_StratComp.jpg",
+            "caption": "Gund-i Topzawa Building 1-W Phase B Stratigraphy Comparison, West-Facing Sections"
+        },
+        "4.10": {
+            "source_file": "AnnotatedImages/room2_section_17.2.jpg",
+            "caption": "Room 2 South Facing Section"
+        },
+        "4.11": {
+            "source_file": "Building 1B-W Percent Vessel Type by Room - Grayscale - Cropped.png",
+            "caption": "Gund-i Topzawa Building 1-W Phase B, Room 3 Objects"
+        },
+        "4.17": {
+            "source_file": "1092.24-drawing.jpg",
+            "caption": "Partially Pierced Disc, GT Building 1-W Phase B Room 1"
+        },
+        "4.20": {
+            "source_file": "1327 - Spearhead Illustration.jpg",
+            "caption": "Spearhead from Building 1-W Phase B, Room 2"
+        },
+        "4.21": {
+            "source_file": "AnnotatedImages/Room3-lot7.jpg",
+            "caption": "Gund-i Topzawa 1C-W Burial"
+        }
+    },
+    "5": {
+        "5.1": {
+            "source_file": "QM_CORONA_Map.tif",
+            "caption": "CORONA Image of Qalat Mudjesir. August 16, 1968"
+        },
+        "5.2": {
+            "source_file": "QM_Maxar-Satellite_Map.tif",
+            "caption": "Contemporary Maxar satellite image of Qalat Mudjesir with military fortification trenches visible"
+        }
+    },
+    "6": {
+        "6.1": {
+            "source_file": "v1 Maps/GD_MDJR Ped vs Horse Paths.jpg",
+            "caption": "Pedestrian and Horse Least Cost Paths Between Gird-i Dasht and Mudjesir"
+        },
+        "6.2": {
+            "source_file": "v1 Maps/Rust Vectorized Fields.jpg",
+            "caption": "Vectorized field of Rust overlaid on DEM"
+        },
+        "6.3": {
+            "source_file": "v1 Maps/GT - FIeld Capable Polygon.jpg",
+            "caption": "Catchment of Agriculturally Capable Land around Gund-i Topzawa"
+        },
+        "6.4": {
+            "source_file": "v1 Maps/Mudjesir - 6100 Population Field Area.jpg",
+            "caption": "Estimate of Required Agricultural Land around Mudjesir for 6,110 People"
+        }
+    },
+    "7": {
+        "7.1": {
+            "source_file": "Zimansky 1990 Sargon routes previous .jpg",
+            "caption": "Overview of Possible Eighth Campaign Reconstructions (Zimansky 1990)"
+        },
+        "7.3": {
+            "source_file": "Musasir relief  - left.jpg",
+            "caption": "Muṣaṣir Relief Detail. Left portion"
+        },
+        "7.6": {
+            "source_file": "Musasir relief  - center.jpg",
+            "caption": "Central Portion"
+        },
+        "7.8": {
+            "source_file": "Musasir relief  - right.jpg",
+            "caption": "Right portion"
+        },
+        "7.10": {
+            "source_file": "QM_drawing-overview_possible shapes.png",
+            "caption": "Bronze Model City from Toprakkale"
+        }
+    }
+}

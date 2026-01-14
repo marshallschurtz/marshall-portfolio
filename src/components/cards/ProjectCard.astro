@@ -1,0 +1,58 @@
+---
+import DataBlock from '../ui/DataBlock.astro';
+
+interface Props {
+  title: string;
+  slug: string;
+  imageUrl: string;
+  location?: string;
+  type?: string;
+  status?: string;
+  date?: string;
+  class?: string;
+}
+
+const { 
+  title, 
+  slug, 
+  imageUrl, 
+  location = "UNKNOWN", 
+  type = "ARCHIVE", 
+  status = "COMPLETE", 
+  date,
+  class: className 
+} = Astro.props;
+---
+
+<a href={`/work/${slug}`} class:list={["group relative block aspect-[4/5] overflow-hidden bg-bedrock border border-transparent hover:border-brand-orange transition-colors duration-300", className]}>
+  {/* Background Image */}
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={imageUrl} 
+      alt={title}
+      class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 group-hover:opacity-40 opacity-80"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-bedrock via-bedrock/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
+  </div>
+
+  {/* Content Overlay */}
+  <div class="absolute inset-0 z-10 flex flex-col justify-end p-6">
+    <h3 class="font-sans text-2xl font-bold text-off-white mb-4 group-hover:-translate-y-2 transition-transform duration-300">
+      {title}
+    </h3>
+
+    {/* Metadata Grid - Hidden by default, shown on hover */}
+    <div class="grid grid-cols-2 gap-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75">
+      <DataBlock label="LOC" value={location} />
+      <DataBlock label="TYPE" value={type} />
+      <DataBlock label="STATUS" value={status} />
+      {date && <DataBlock label="FIELD DATE" value={date} />}
+    </div>
+  </div>
+
+  {/* Corner accents */}
+  <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-brand-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</a>

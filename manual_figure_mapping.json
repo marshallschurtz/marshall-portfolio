@@ -1,0 +1,62 @@
+{
+    "2": {
+        "2.2": {
+            "source_file": "Khorsabad_Salle_XIII._Bas-relief_4_-_sac_de_Musasir.jpg",
+            "caption": "Muṣaṣir Relief. Sargon II's Palace at Khorsabad, Room XIII, Slab 4. (Image from Albenda 1986, pl. 133)",
+            "public_url": "/assets/dissertation/figures/figure-2-2.jpg"
+        }
+    },
+    "4": {
+        "4.1": {
+            "source_file": "Mudjesir_modern_building_picture.png",
+            "caption": "Traditional Building at Mudjesir",
+            "public_url": "/assets/dissertation/figures/figure-4-1.png"
+        },
+        "4.5": {
+            "source_file": "Room2_Drum_Illustration - Grayscale.jpg",
+            "caption": "Room 1 Pithos (Plate 44.2)",
+            "public_url": "/assets/dissertation/figures/figure-4-5.jpg"
+        },
+        "4.11": {
+            "source_file": "Building 1B-W Percent Vessel Type by Room - Grayscale - Cropped.png",
+            "caption": "Gund-i Topzawa Building 1-W Phase B, Room 3 Objects",
+            "public_url": "/assets/dissertation/figures/figure-4-11.png"
+        },
+        "4.20": {
+            "source_file": "1327 - Spearhead Illustration.jpg",
+            "caption": "Spearhead from Building 1-W Phase B, Room 2",
+            "public_url": "/assets/dissertation/figures/figure-4-20.jpg"
+        }
+    },
+    "5": {
+        "5.1": {
+            "source_file": "QM_CORONA_Map.tif",
+            "caption": "CORONA Image of Qalat Mudjesir. August 16, 1968",
+            "public_url": "/assets/dissertation/figures/figure-5-1.jpg",
+            "needs_conversion": true
+        },
+        "5.2": {
+            "source_file": "QM_Maxar-Satellite_Map.tif",
+            "caption": "Contemporary Maxar satellite image of Qalat Mudjesir with military fortification trenches visible",
+            "public_url": "/assets/dissertation/figures/figure-5-2.jpg",
+            "needs_conversion": true
+        }
+    },
+    "7": {
+        "7.3": {
+            "source_file": "Musasir relief  - left.jpg",
+            "caption": "Muṣaṣir Relief Detail. Left portion (Image from Albenda 1986 Pl. 133)",
+            "public_url": "/assets/dissertation/figures/figure-7-3.jpg"
+        },
+        "7.6": {
+            "source_file": "Musasir relief  - center.jpg",
+            "caption": "Central Portion (Image from Albenda 1986 Pl. 133)",
+            "public_url": "/assets/dissertation/figures/figure-7-6.jpg"
+        },
+        "7.8": {
+            "source_file": "Musasir relief  - right.jpg",
+            "caption": "(Image from Albenda 1986, pl. 133)",
+            "public_url": "/assets/dissertation/figures/figure-7-8.jpg"
+        }
+    }
+}

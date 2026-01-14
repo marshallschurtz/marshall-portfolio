@@ -1,0 +1,167 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  chapterNumber?: string;
+  nextChapter?: { number: string; title: string; slug: string };
+  prevChapter?: { number: string; title: string; slug: string };
+}
+
+const { title, chapterNumber, nextChapter, prevChapter } = Astro.props;
+const pageTitle = chapterNumber ? `Chapter ${chapterNumber}: ${title} | Marshall Schurtz` : `${title} | Marshall Schurtz`;
+---
+
+<BaseLayout title={pageTitle} description={`Dissertation chapter by Marshall Schurtz - ${title}`}>
+  
+  <div class="container mx-auto px-4 py-12 md:py-24">
+    <div class="max-w-3xl mx-auto">
+      
+      <!-- Breadcrumb -->
+      <nav class="mb-8 flex items-center gap-2 text-sm font-mono">
+        <a href="/academic" class="text-gray-500 hover:text-[var(--color-brand-orange)] transition-colors">
+          ACADEMIC
+        </a>
+        <span class="text-gray-600">/</span>
+        <a href="/academic/historical-archaeological-analysis-of-musasir" class="text-gray-500 hover:text-[var(--color-brand-orange)] transition-colors">
+          DISSERTATION
+        </a>
+        {chapterNumber && (
+          <>
+            <span class="text-gray-600">/</span>
+            <span class="text-gray-400">CHAPTER {chapterNumber}</span>
+          </>
+        )}
+      </nav>
+
+      <!-- Chapter Header -->
+      {chapterNumber && (
+        <div class="mb-12">
+          <p class="text-xs font-mono text-[var(--color-brand-orange)] mb-2">CHAPTER {chapterNumber}</p>
+          <h1 class="text-3xl md:text-4xl font-sans font-medium text-[var(--color-off-white)] leading-tight">{title}</h1>
+        </div>
+      )}
+
+      {!chapterNumber && (
+        <h1 class="text-3xl md:text-4xl font-sans font-medium text-[var(--color-off-white)] mb-12">{title}</h1>
+      )}
+
+      <!-- Chapter content slot -->
+      <article class="prose prose-invert prose-lg max-w-none">
+        <slot />
+      </article>
+
+      <!-- Chapter navigation -->
+      {(prevChapter || nextChapter) && (
+        <nav class="mt-16 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {prevChapter && (
+            <a 
+              href={`/academic/historical-archaeological-analysis-of-musasir/${prevChapter.slug}`}
+              class="group p-6 bg-white/5 border border-white/10 hover:border-[var(--color-brand-orange)] hover:bg-white/10 transition-all"
+            >
+              <p class="text-xs font-mono text-gray-500 mb-2">← PREVIOUS CHAPTER</p>
+              <p class="text-sm font-mono text-gray-400 mb-1">Chapter {prevChapter.number}</p>
+              <p class="text-[var(--color-off-white)] group-hover:text-[var(--color-brand-orange)] transition-colors">{prevChapter.title}</p>
+            </a>
+          )}
+          
+          {nextChapter && (
+            <a 
+              href={`/academic/historical-archaeological-analysis-of-musasir/${nextChapter.slug}`}
+              class="group p-6 bg-white/5 border border-white/10 hover:border-[var(--color-brand-orange)] hover:bg-white/10 transition-all md:text-right"
+            >
+              <p class="text-xs font-mono text-gray-500 mb-2">NEXT CHAPTER →</p>
+              <p class="text-sm font-mono text-gray-400 mb-1">Chapter {nextChapter.number}</p>
+              <p class="text-[var(--color-off-white)] group-hover:text-[var(--color-brand-orange)] transition-colors">{nextChapter.title}</p>
+            </a>
+          )}
+        </nav>
+      )}
+
+      <!-- Back to dissertation home -->
+      <div class="mt-12 text-center">
+        <a href="/academic/historical-archaeological-analysis-of-musasir" class="text-sm font-mono text-gray-500 hover:text-[var(--color-brand-orange)] transition-colors">
+          ← BACK TO DISSERTATION HOME
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style is:global>
+  /* Dissertation-specific prose styling - using pure CSS for Tailwind v4 compatibility */
+  article.prose h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: var(--font-sans);
+    color: var(--color-off-white);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  article.prose h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-family: var(--font-sans);
+    color: var(--color-off-white);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  article.prose h4 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-family: var(--font-sans);
+    color: #d1d5db;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  article.prose p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    color: #d1d5db;
+  }
+  
+  article.prose blockquote {
+    border-left: 4px solid rgba(255, 69, 0, 0.3);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: #9ca3af;
+  }
+  
+  article.prose figure {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  article.prose figcaption {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+  }
+  
+  article.prose a {
+    color: var(--color-brand-orange);
+  }
+  
+  article.prose a:hover {
+    text-decoration: underline;
+  }
+  
+  article.prose ul, article.prose ol {
+    color: #d1d5db;
+    margin-left: 1.5rem;
+  }
+  
+  article.prose ul > * + *, article.prose ol > * + * {
+    margin-top: 0.5rem;
+  }
+  
+  article.prose li {
+    line-height: 1.75;
+  }
+</style>

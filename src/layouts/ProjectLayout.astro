@@ -1,0 +1,182 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { urlFor } from '../lib/sanity';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Button from '../components/ui/Button.astro';
+
+const { project } = Astro.props;
+
+const formatDate = (dateString: string) => {
+  if (!dateString) return 'Unknown Date';
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<BaseLayout title={`${project.title} | Marshall Schurtz`} description={project.description?.slice(0, 160)}>
+  <article class="pt-24 min-h-screen">
+    <div class="container mx-auto px-6 md:px-12">
+      
+      {/* Header */}
+      <div class="mb-12">
+        <span class="text-brand-orange font-mono text-xs tracking-widest uppercase block mb-4">
+          {project.projectType} // {project.status}
+        </span>
+        <h1 class="text-4xl md:text-6xl font-bold text-off-white mb-6 leading-tight max-w-4xl">
+          {project.title}
+        </h1>
+        <div class="flex flex-wrap gap-6 text-sm font-mono text-concrete border-t border-concrete/20 pt-6 mt-6">
+          {project.location && (
+            <div>
+              <span class="block text-white/40 mb-1">LOCATION</span>
+              {project.location}
+            </div>
+          )}
+          {project.date && (
+            <div>
+              <span class="block text-white/40 mb-1">DATE</span>
+              {formatDate(project.date)}
+            </div>
+          )}
+          {project.institution && (
+             <div>
+              <span class="block text-white/40 mb-1">INSTITUTION</span>
+              {project.institution}
+             </div>
+          )}
+          {project.role && (
+             <div>
+              <span class="block text-white/40 mb-1">ROLE</span>
+              {project.role}
+             </div>
+          )}
+        </div>
+      </div>
+
+      {/* Main Image */}
+      {project.mainImage && (
+        <div class="mb-16 aspect-video w-full bg-neutral-900 overflow-hidden relative border border-concrete/20 group">
+          <img 
+            src={urlFor(project.mainImage).width(1920).height(1080).url()} 
+            alt={project.title}
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-x-0 bottom-0 h-1 bg-brand-orange transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+        </div>
+      )}
+
+      {/* Content Grid */}
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
+        
+        {/* Main Description */}
+        <div class="lg:col-span-2">
+           <h3 class="font-mono text-brand-orange text-sm tracking-widest mb-6 border-l-2 border-brand-orange pl-4">
+             PROJECT BRIEF
+           </h3>
+           <div class="prose prose-invert prose-lg max-w-none text-concrete font-light leading-relaxed whitespace-pre-line">
+             {project.description}
+           </div>
+
+           {/* Video Embed */}
+           {project.youtubeId && (
+             <div class="mt-12">
+                <h3 class="font-mono text-brand-orange text-sm tracking-widest mb-6 border-l-2 border-brand-orange pl-4">
+                  VISUAL RECORD
+                </h3>
+                <div class="aspect-video w-full">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src={`https://www.youtube.com/embed/${project.youtubeId}`} 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    class="border border-concrete/20"
+                  ></iframe>
+                </div>
+             </div>
+           )}
+        </div>
+
+        {/* Sidebar Data */}
+        <div class="lg:col-span-1 space-y-12">
+          
+          {project.projectType === 'excavation' && (
+            <div class="bg-neutral-900/50 p-6 border border-concrete/20">
+               <h4 class="font-mono text-white text-xs mb-4 uppercase border-b border-concrete/20 pb-2">Excavation Data</h4>
+               <ul class="space-y-4 font-mono text-xs text-concrete">
+                 {project.siteName && (
+                   <li class="flex justify-between">
+                     <span>SITE NAME</span>
+                     <span class="text-off-white">{project.siteName}</span>
+                   </li>
+                 )}
+                 {project.period && (
+                   <li class="flex justify-between">
+                     <span>PERIOD</span>
+                     <span class="text-off-white">{project.period}</span>
+                   </li>
+                 )}
+                  {project.seasons && project.seasons.length > 0 && (
+                   <li class="flex justify-between">
+                     <span>SEASONS</span>
+                     <span class="text-off-white">{project.seasons.join(', ')}</span>
+                   </li>
+                 )}
+               </ul>
+            </div>
+          )}
+
+          {project.projectType === 'tour' && (
+             <div class="bg-neutral-900/50 p-6 border border-concrete/20">
+               <h4 class="font-mono text-white text-xs mb-4 uppercase border-b border-concrete/20 pb-2">Tour Details</h4>
+               <ul class="space-y-4 font-mono text-xs text-concrete">
+                 {project.tourType && (
+                   <li class="flex justify-between">
+                     <span>TYPE</span>
+                     <span class="text-off-white">{project.tourType}</span>
+                   </li>
+                 )}
+                 {project.duration && (
+                   <li class="flex justify-between">
+                     <span>DURATION</span>
+                     <span class="text-off-white">{project.duration}</span>
+                   </li>
+                 )}
+                  {project.price && (
+                   <li class="flex justify-between">
+                     <span>PRICE</span>
+                     <span class="text-off-white">{project.price}</span>
+                   </li>
+                 )}
+               </ul>
+               {project.bookingUrl && (
+                  <div class="mt-6">
+                    <Button href={project.bookingUrl} text="BOOK NOW" />
+                  </div>
+               )}
+            </div>
+          )}
+          
+          {project.tags && project.tags.length > 0 && (
+            <div>
+              <h4 class="font-mono text-brand-orange text-xs mb-4 uppercase">Tags</h4>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                   <span class="text-[10px] font-mono border border-concrete/30 px-2 py-1 text-concrete hover:border-brand-orange hover:text-brand-orange transition-colors cursor-default">
+                     {tag}
+                   </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

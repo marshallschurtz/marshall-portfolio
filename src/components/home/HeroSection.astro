@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+
+// Placeholder for Button if not available, usually provided by Agent 4
+// import Button from '../ui/Button.astro'; 
+---
+
+<section class="relative h-screen w-full overflow-hidden bg-bedrock flex items-center justify-center" id="hero">
+  <!-- Background Image with Grayscale and Overlay -->
+  <div class="absolute inset-0 z-0 select-none">
+    <img 
+      src="/assets/uthina-hero.webp" 
+      alt="Uthina archaeological site floor" 
+      class="w-full h-full object-cover grayscale brightness-50 contrast-125"
+    />
+    <!-- Gradient Overlay for Contrast/Theme Matching -->
+    <!-- Gradient Overlay for Contrast/Theme Matching -->
+    <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-hero-gradient-start)]/90 via-[var(--color-hero-gradient-start)]/50 to-transparent mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-hero-gradient-start)]/30 via-transparent to-[var(--color-hero-gradient-end)]"></div>
+  </div>
+
+
+
+  <!-- Main Content -->
+  <div class="relative z-10 container mx-auto px-4 md:px-8 text-center md:text-left max-w-7xl">
+    <div class="flex flex-col md:w-3/4 lg:w-2/3 space-y-6">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight text-off-white text-shadow uppercase">
+        EXPLORING THE WORLD BY <span class="text-brand-orange">UNDERSTANDING ITS PAST</span>.
+      </h1>
+      
+      <p class="text-base md:text-lg text-off-white font-mono max-w-2xl text-shadow uppercase">
+        Founder | Archaeologist | Storyteller | Strategist
+      </p>
+
+      <div class="pt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+        <a href="#about" class="inline-flex items-center justify-center gap-2 bg-brand-orange text-bedrock font-bold py-3 px-6 rounded-sm hover:bg-white hover:text-bedrock transition-all duration-300 font-mono uppercase tracking-wider">
+          About Me
+        </a>
+        <a href="#media" class="inline-flex items-center justify-center gap-2 border border-brand-orange text-brand-orange font-bold py-3 px-6 rounded-sm hover:bg-brand-orange hover:text-bedrock transition-all duration-300 font-mono uppercase tracking-wider">
+          Youtube
+        </a>
+        <a href="/resume" class="inline-flex items-center justify-center gap-2 border border-concrete text-concrete font-bold py-3 px-6 rounded-sm hover:bg-white hover:text-bedrock transition-all duration-300 font-mono uppercase tracking-wider">
+          Experience
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical/Topographic Details (Decorative) -->
+  <div class="absolute bottom-0 left-0 w-full h-24 z-10 pointer-events-none opacity-50">
+    <!-- Abstract SVG texture -->
+    <svg class="w-full h-full text-brand-orange/20" preserveAspectRatio="none" viewBox="0 0 1000 100">
+      <path d="M0,100 L0,50 Q250,80 500,40 T1000,60 L1000,100 Z" fill="currentColor" />
+      <path d="M0,100 L0,70 Q250,90 500,60 T1000,80 L1000,100 Z" fill="currentColor" opacity="0.5"/>
+    </svg>
+  </div>
+
+
+</section>

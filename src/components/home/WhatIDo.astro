@@ -1,0 +1,140 @@
+---
+const pillars = [
+  {
+    title: "Content Creation",
+    icon: "youtube",
+    brief: "Documenting the built world through a lens of historical curiosity. A digital excavation of the stories hidden in plain sight, ensuring the past isn't just remembered, but experienced.",
+    link: "https://www.youtube.com/@MarshallSchurtz", 
+    isExternal: true,
+    linkText: "Watch Channel",
+    image: "/assets/youtube/secret-weapon.png",
+    imagePlaceholder: "" 
+  },
+  {
+    title: "Always Sunny Tour",
+    icon: "walk",
+    brief: "A rogue urban exploration through the filming locations of Philadelphia's most chaotic TV show. It's not just a tour; it's an immersive dive into the Gang's habitat.",
+    link: "/always-sunny-tour",
+    isExternal: false,
+    linkText: "Join the Tour",
+    image: "/assets/always-sunny/sunny-tour-hero.jpg",
+    imagePlaceholder: "" 
+  },
+  {
+    title: "Merakiva Travel",
+    icon: "globe",
+    brief: "Curating archaeological expeditions for the modern explorer. We bridge the gap between tourist and field researcher, offering access to history's deepest layers.",
+    link: "/merakiva",
+    isExternal: false,
+    linkText: "Explore Services",
+    image: "/assets/headshots/voice-messages.jpg",
+    imagePlaceholder: "" 
+  },
+  {
+    title: "Academic Work",
+    icon: "book",
+    brief: "Rigorous research at the intersection of urban infrastructure and human history. Investigating how the built environment shapes—and is shaped by—society.",
+    link: "/research",
+    isExternal: false,
+    linkText: "View Research",
+    image: "/assets/headshots/marshall-amph.webp",
+    imagePlaceholder: "" 
+  },
+  {
+    title: "Strategy & Analytics",
+    icon: "chart",
+    brief: "Decoding the patterns of human behavior through data. Applying archaeological methodologies to modern cultural insights and strategic consulting.",
+    link: "/resume",
+    isExternal: false,
+    linkText: "View Experience",
+    image: "/assets/strategy-abstract.webp",
+    imagePlaceholder: "" 
+  }
+];
+---
+
+<section class="py-20 bg-bedrock text-off-white border-b border-concrete/20 bg-[url('/assets/grid-pattern.svg')] bg-fixed bg-opacity-5">
+  <div class="container mx-auto px-4 md:px-8">
+    
+    <!-- Section Header -->
+    <div class="flex items-center gap-4 mb-16">
+      <span class="w-2 h-2 bg-brand-orange"></span>
+      <h2 class="font-mono text-sm tracking-[0.2em] text-brand-orange uppercase">
+        // What I Do
+      </h2>
+      <div class="h-px bg-brand-orange/30 flex-grow"></div>
+    </div>
+
+    <!-- Pillars Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+      {pillars.map((pillar) => (
+        <a 
+          href={pillar.link}
+          target={pillar.isExternal ? "_blank" : "_self"}
+          rel={pillar.isExternal ? "noopener noreferrer" : ""}
+          class="group block h-full bg-[#1A1A1A] border border-concrete/20 hover:border-brand-orange transition-all duration-300 relative overflow-hidden flex flex-col"
+        >
+          <!-- Hover Overlay -->
+          <div class="absolute inset-0 bg-brand-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10"></div>
+          
+          <!-- Corner Accents (Top Right) -->
+          <div class="absolute top-0 right-0 w-3 h-3 border-t border-r border-brand-orange/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
+
+          <!-- Image -->
+          <div class={`w-full h-48 relative overflow-hidden border-b border-concrete/20 ${pillar.imagePlaceholder}`}>
+             {pillar.image ? (
+                <img 
+                  src={pillar.image} 
+                  alt={pillar.title} 
+                  class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" 
+                />
+             ) : (
+                <div class="absolute inset-0 flex items-center justify-center text-concrete/20">
+                    <span class="font-mono text-xs uppercase">[Image: {pillar.title}]</span>
+                </div>
+             )}
+          </div>
+
+          <div class="p-8 flex flex-col flex-grow relative z-10">
+            <!-- Icon -->
+            <div class="mb-6 text-brand-orange group-hover:scale-110 transition-transform duration-300 origin-left">
+              {pillar.icon === 'youtube' && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+              )}
+              {pillar.icon === 'walk' && (
+                 <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              )}
+  
+              {pillar.icon === 'globe' && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              )}
+  
+              {pillar.icon === 'book' && (
+                 <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+              )}
+  
+              {pillar.icon === 'chart' && (
+                 <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              )}
+            </div>
+  
+            <h3 class="text-xl font-bold uppercase mb-3 text-off-white group-hover:text-brand-orange transition-colors">
+              {pillar.title}
+            </h3>
+            
+            <p class="text-concrete text-sm leading-relaxed mb-6 font-mono">
+              {pillar.brief}
+            </p>
+  
+            <div class="flex items-center text-brand-orange font-mono text-xs uppercase tracking-wider mt-auto">
+              <span class="mr-2 group-hover:mr-3 transition-all">{pillar.linkText}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

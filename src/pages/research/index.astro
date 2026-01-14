@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import { getExcavations, getPublications, urlFor } from '../../lib/sanity'; // Ensure this matches export
+
+const title = "Research | Marshall Schurtz";
+const description = "Dissertation, excavations, and scholarly research by Marshall Schurtz";
+
+const excavations = await getExcavations();
+const publications = await getPublications();
+
+const dissertationMeta = {
+  title: '"Like a Snake in Difficult Mountains": A Historical and Archaeological Analysis of the Character and Origin of the Iron Age Kingdom of Muṣaṣir',
+  shortTitle: '"Like a Snake in Difficult Mountains"',
+  author: 'Marshall Wheeler Schurtz',
+  year: '2022',
+  institution: 'University of Pennsylvania',
+  degree: 'Doctor of Philosophy',
+  advisor: 'Richard L. Zettler',
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container mx-auto px-4 py-12 md:py-24">
+    <div class="max-w-5xl mx-auto">
+      
+      <!-- Page Header -->
+      <div class="mb-16">
+        <h1 class="text-4xl md:text-6xl font-sans font-medium mb-4 text-[var(--color-off-white)]">
+          Research
+        </h1>
+        <p class="text-lg text-gray-400 max-w-3xl">
+          Scholarly research on the archaeology and history of the ancient Near East, 
+          with a focus on Iron Age settlement patterns in the northern Zagros Mountains.
+        </p>
+      </div>
+
+      <!-- DISSERTATION SECTION -->
+      <section class="mb-20">
+        <SectionHeader title="Doctoral Dissertation" number="01" />
+        
+        <div class="mt-8 grid md:grid-cols-5 gap-8">
+          
+          <!-- Left: Cover Image -->
+          <div class="md:col-span-2">
+            <a href="/research/historical-archaeological-analysis-of-musasir" class="block group">
+              <div class="bg-white/5 border border-white/10 relative overflow-hidden group-hover:border-[var(--color-brand-orange)] transition-colors">
+                <img 
+                  src="/assets/dissertation/dissertation-cover.png" 
+                  alt="Dissertation Cover - Like a Snake in Difficult Mountains"
+                  class="w-full h-auto"
+                />
+              </div>
+            </a>
+          </div>
+
+          <!-- Right: Dissertation info -->
+          <div class="md:col-span-3">
+            <p class="text-xs font-mono text-[var(--color-brand-orange)] mb-3">
+              DOCTORAL DISSERTATION • {dissertationMeta.year}
+            </p>
+            <h2 class="text-2xl md:text-3xl font-sans font-medium text-[var(--color-off-white)] mb-4 leading-tight">
+              {dissertationMeta.shortTitle}
+            </h2>
+            <p class="text-gray-400 mb-4">
+              A Historical and Archaeological Analysis of the Character and Origin of the 
+              Iron Age Kingdom of Muṣaṣir
+            </p>
+            
+            <div class="mb-6 text-sm text-gray-500 space-y-1">
+              <p>{dissertationMeta.degree}, {dissertationMeta.institution}</p>
+              <p>Dissertation Advisor: {dissertationMeta.advisor}</p>
+            </div>
+
+            <p class="text-gray-300 mb-6 leading-relaxed">
+              This research investigates the kingdom of Muṣaṣir through excavations and survey 
+              in the Sidekan subdistrict of Iraqi Kurdistan, examining how small polities in 
+              marginal borderlands navigated the spheres of larger empires and how religious 
+              appropriation affected local settlement dynamics.
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <a 
+                href="/research/historical-archaeological-analysis-of-musasir"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--color-brand-orange)] text-white font-mono text-sm hover:bg-[var(--color-brand-orange)]/90 transition-colors"
+              >
+                READ FULL DISSERTATION →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EXCAVATIONS (FIELDWORK) SECTION -->
+      <section class="mb-20">
+        <!-- Using "Fieldwork" as display title per user request, but structurally this is Excavations -->
+        <SectionHeader title="Fieldwork" number="02" />
+        
+        <div class="mt-8 space-y-6">
+          {excavations && excavations.length > 0 ? (
+            excavations.map((excavation) => (
+              <div class="bg-white/5 border border-white/10 p-6 rounded-lg hover:border-white/20 transition-all group overflow-hidden">
+                <div class="grid md:grid-cols-4 gap-6">
+                    <!-- Image -->
+                    <div class="md:col-span-1 h-32 md:h-full bg-black/40 rounded-md overflow-hidden relative">
+                         {excavation.mainImage && (
+                            <img 
+                                src={urlFor(excavation.mainImage).width(400).url()} 
+                                alt={excavation.mainImage.alt || excavation.title}
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                         )}
+                    </div>
+                    <!-- Content -->
+                    <div class="md:col-span-3 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap justify-between items-start gap-4 mb-2">
+                                <h3 class="text-2xl font-sans font-medium text-[var(--color-off-white)]">
+                                    {excavation.title}
+                                </h3>
+                                
+                                {excavation.seasons && (
+                                    <div class="flex flex-wrap gap-2">
+                                        {excavation.seasons.map((season) => (
+                                            <span class="px-2 py-1 bg-white/10 text-xs font-mono rounded text-gray-300">
+                                                {season}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            
+                            {excavation.siteName && (
+                                <p class="text-sm font-mono text-[var(--color-brand-orange)] mb-3">
+                                    {excavation.siteName}
+                                </p>
+                            )}
+                            
+                            {excavation.description && (
+                                <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
+                                    {excavation.description}
+                                </p>
+                            )}
+                        </div>
+
+                        <div class="mt-4 flex">
+                             {/* CTA for Expand / Full Page */}
+                             <a 
+                             href={`/research/excavations/${excavation.slug.current}`} 
+                             class="text-sm font-mono text-white/70 hover:text-[var(--color-brand-orange)] border-b border-transparent hover:border-[var(--color-brand-orange)] transition-colors"
+                           >
+                             VIEW PROJECT DETAILS →
+                           </a>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            ))
+          ) : (
+             <div class="bg-white/5 border border-white/10 p-8">
+                <p class="text-gray-500 text-sm">
+                  Excavation projects will be listed here.
+                </p>
+              </div>
+          )}
+        </div>
+      </section>
+
+      <!-- PUBLICATIONS & CONFERENCE PAPERS SECTION -->
+      <section class="mb-20">
+        <SectionHeader title="Publications & Conference Papers" number="03" />
+        
+        <div class="mt-8">
+          {publications && publications.length > 0 ? (
+            <div class="space-y-4">
+                 {publications.map((pub) => (
+                    <div class="bg-white/5 border border-white/10 p-6 rounded hover:border-white/20 transition-colors">
+                        <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-4 mb-2">
+                             <h3 class="text-lg text-[var(--color-off-white)] font-medium">
+                                {pub.title}
+                             </h3>
+                             <span class="text-xs font-mono text-[var(--color-brand-orange)] uppercase border border-[var(--color-brand-orange)]/30 px-2 py-0.5 rounded">
+                                {pub.type === 'conferencePaper' ? 'Conference Paper' : 
+                                 pub.type === 'article' ? 'Journal Article' : 
+                                 pub.type === 'bookChapter' ? 'Book Chapter' : 'Publication'}
+                             </span>
+                        </div>
+                        
+                        {pub.citation && (
+                            <p class="text-gray-400 text-sm mb-4 font-serif italic">
+                                {pub.citation}
+                            </p>
+                        )}
+                        
+                        <div class="flex gap-4 text-xs font-mono">
+                            {pub.file && (
+                                <a href={pub.file.asset?.url} target="_blank" class="text-gray-400 hover:text-white flex items-center gap-1">
+                                    <span>Download PDF</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                </a>
+                            )}
+                            {pub.url && (
+                                <a href={pub.url} target="_blank" class="text-gray-400 hover:text-white flex items-center gap-1">
+                                    <span>External Link</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                 ))}
+            </div>
+          ) : (
+             <div class="bg-white/5 border border-white/10 p-8">
+                <p class="text-gray-500 text-sm">
+                  Publications and conference papers will be listed here.
+                </p>
+              </div>
+          )}
+        </div>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>

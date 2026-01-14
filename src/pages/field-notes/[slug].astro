@@ -1,0 +1,16 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getFieldNotes } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+  const posts = await getFieldNotes();
+  return posts.map((post: any) => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<PostLayout post={post} />

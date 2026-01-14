@@ -1,0 +1,57 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  publishedAt: string;
+  duration?: string;
+  class?: string;
+}
+
+const { videoId, title, publishedAt, duration, class: className } = Astro.props;
+
+// Format date
+const dateObj = new Date(publishedAt);
+const dateStr = dateObj.toLocaleDateString('en-US', { 
+  year: 'numeric', 
+  month: 'short', 
+  day: 'numeric' 
+});
+
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+---
+
+<a href={videoUrl} target="_blank" rel="noopener noreferrer" class:list={["group block bg-bedrock shadow-lg hover:shadow-brand-orange/10 transition-shadow duration-300", className]}>
+  <div class="relative aspect-video overflow-hidden bg-black/20">
+    <img 
+      src={thumbnailUrl} 
+      alt={title}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+    />
+    
+    {/* Duration Badge */}
+    {duration && (
+      <div class="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 text-[10px] font-mono text-white rounded-sm border border-white/10">
+        {duration}
+      </div>
+    )}
+
+    {/* Play Icon Overlay */}
+    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div class="w-10 h-10 rounded-full bg-brand-orange/90 flex items-center justify-center text-bedrock">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 ml-0.5">
+          <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-4 border-t border-white/5">
+    <h3 class="font-sans text-sm font-medium text-off-white line-clamp-2 group-hover:text-brand-orange transition-colors duration-200">
+      {title}
+    </h3>
+    <p class="mt-2 font-mono text-xs text-concrete">
+      {dateStr}
+    </p>
+  </div>
+</a>

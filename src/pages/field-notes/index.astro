@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getFieldNotes, urlFor } from '../../lib/sanity';
+
+const fieldNotes = await getFieldNotes();
+const pageTitle = "Field Notes | Marshall Schurtz";
+const pageDescription = "Observations, research, and updates from the field.";
+
+const formatDate = (dateString: string) => {
+  if (!dateString) return 'Unknown Date';
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="pt-24 pb-20 min-h-screen">
+    <div class="container mx-auto px-6 md:px-12">
+      
+      <div class="mb-16 border-b border-concrete/20 pb-6">
+        <h1 class="text-4xl md:text-5xl font-bold text-off-white mb-4">FIELD NOTES</h1>
+        <p class="font-mono text-brand-orange text-sm">TRANSMISSIONS FROM THE SURFACE AND BELOW</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {fieldNotes.length > 0 ? fieldNotes.map((note: any) => (
+          <a href={`/field-notes/${note.slug.current}`} class="group block bg-neutral-900 border border-concrete/20 hover:border-brand-orange transition-colors duration-300">
+            {/* Image */}
+            <div class="aspect-video w-full overflow-hidden bg-neutral-800 relative">
+               {note.mainImage ? (
+                 <img 
+                    src={urlFor(note.mainImage).width(600).height(400).url()} 
+                    alt={note.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                 />
+               ) : (
+                 <div class="w-full h-full flex items-center justify-center text-concrete font-mono text-xs">
+                    [NO IMAGE DATA]
+                 </div>
+               )}
+               <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+
+            {/* Content */}
+            <div class="p-6">
+               <div class="font-mono text-brand-orange text-[10px] mb-3 uppercase tracking-wider">
+                  {formatDate(note.publishedAt)}
+               </div>
+               <h2 class="text-xl font-bold text-off-white group-hover:text-brand-orange transition-colors mb-3 line-clamp-2">
+                 {note.title}
+               </h2>
+               {note.author && (
+                <div class="text-concrete text-xs font-mono">
+                  BY {note.author}
+                </div>
+               )}
+            </div>
+          </a>
+        )) : (
+            <div class="col-span-full py-20 text-center border border-dashed border-concrete/30 text-concrete font-mono">
+                // NO FIELD NOTES RECORDED
+            </div>
+        )}
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,97 @@
+---
+import ThemeToggle from './ThemeToggle.svelte';
+---
+
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-colors duration-300 py-4 px-6 md:px-12 flex justify-between items-center border-b border-transparent">
+  <div class="logo font-mono text-sm tracking-widest text-[#F5F5F5]">
+    <a href="/" class="hover:text-[var(--color-brand-orange)] transition-colors">
+      MARSHALL SCHURTZ
+    </a>
+  </div>
+
+  <nav class="hidden md:flex gap-8 font-mono text-xs tracking-wider items-center">
+    <a href="/research" class="nav-link hover:text-[var(--color-brand-orange)] transition-colors">
+      RESEARCH
+    </a>
+    <a href="/resume" class="nav-link hover:text-[var(--color-brand-orange)] transition-colors">
+      RESUME
+    </a>
+
+    <a href="/contact" class="nav-link hover:text-[var(--color-brand-orange)] transition-colors">
+      CONTACT
+    </a>
+    
+    <!-- Theme Toggle -->
+    <ThemeToggle client:load />
+  </nav>
+
+  <!-- Mobile: Theme Toggle + Menu Button -->
+  <div class="md:hidden flex items-center gap-3">
+    <ThemeToggle client:load />
+    
+    <button id="mobile-menu-btn" class="text-[var(--color-off-white)] hover:text-[var(--color-brand-orange)] focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 bg-[#1A1A1A] z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center text-center">
+    <button id="close-menu-btn" class="absolute top-6 right-6 text-[var(--color-off-white)] hover:text-[var(--color-brand-orange)]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    <nav class="flex flex-col gap-8 font-mono text-xl tracking-wider">
+        <a href="/research" class="mobile-link hover:text-[var(--color-brand-orange)] transition-colors">
+            RESEARCH
+        </a>
+        <a href="/resume" class="mobile-link hover:text-[var(--color-brand-orange)] transition-colors">
+            RESUME
+        </a>
+
+        <a href="/contact" class="mobile-link hover:text-[var(--color-brand-orange)] transition-colors">
+            CONTACT
+        </a>
+    </nav>
+</div>
+
+<script>
+  const header = document.getElementById('main-header');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  // Scroll Effect - theme aware
+  window.addEventListener('scroll', () => {
+    const isLightMode = document.documentElement.classList.contains('light-mode');
+    
+    if (window.scrollY > 50) {
+      if (isLightMode) {
+        header?.classList.add('bg-white/90', 'backdrop-blur-sm', 'border-[#E0E0E0]');
+      } else {
+        header?.classList.add('bg-[#1A1A1A]', 'border-[#333]');
+      }
+      header?.classList.remove('border-transparent');
+    } else {
+      header?.classList.remove('bg-[#1A1A1A]', 'bg-white/90', 'backdrop-blur-sm', 'border-[#333]', 'border-[#E0E0E0]');
+      header?.classList.add('border-transparent');
+    }
+  });
+
+  // Mobile Menu Logic
+  const toggleMenu = () => {
+      mobileMenu?.classList.toggle('translate-x-full');
+      document.body.classList.toggle('overflow-hidden');
+  };
+
+  mobileMenuBtn?.addEventListener('click', toggleMenu);
+  closeMenuBtn?.addEventListener('click', toggleMenu);
+  
+  mobileLinks.forEach(link => {
+      link.addEventListener('click', toggleMenu);
+  });
+</script>

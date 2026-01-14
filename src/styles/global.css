@@ -1,0 +1,385 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bedrock: #1A1A1A;
+  --color-brand-orange: #FF4500;
+  --color-concrete: #808080;
+  --color-off-white: #F5F5F5;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-hero-gradient-start: #1A1A1A;
+  --color-hero-gradient-end: #1A1A1A;
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Global Styles */
+html,
+body {
+  background-color: var(--color-bedrock);
+  color: var(--color-off-white);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+.light-mode {
+  --color-bg: #F5F5F5;
+  --color-text: #1A1A1A;
+  --color-text-muted: #2A2A2A;
+  --color-border: #D0D0D0;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #FAFAFA;
+  --color-hero-gradient-start: #F5F5F5;
+  --color-hero-gradient-end: #F5F5F5;
+}
+
+/* Dark Mode (default) */
+.dark-mode,
+:root {
+  --color-bg: #1A1A1A;
+  --color-text: #F5F5F5;
+  --color-text-muted: #999999;
+  --color-border: #333333;
+  --color-surface: #242424;
+  --color-surface-hover: #2A2A2A;
+}
+
+/* ============================================
+   LIGHT MODE COMPREHENSIVE OVERRIDES
+   ============================================ */
+
+/* Core background overrides */
+.light-mode,
+.light-mode body {
+  background-color: #F5F5F5 !important;
+  color: #1A1A1A !important;
+}
+
+/* Override Tailwind bedrock backgrounds */
+.light-mode .bg-bedrock,
+.light-mode .bg-\[var\(--color-bedrock\)\],
+.light-mode .bg-\[\#1A1A1A\] {
+  background-color: #F5F5F5 !important;
+}
+
+/* Card/surface backgrounds - make them white */
+.light-mode section,
+.light-mode article {
+  background-color: transparent;
+}
+
+.light-mode .bg-\[\#1A1A1A\],
+.light-mode [style*="background-color: rgb(26, 26, 26)"],
+.light-mode [style*="background: #1A1A1A"] {
+  background-color: #FFFFFF !important;
+}
+
+/* Text color overrides - DARKER for better readability */
+.light-mode .text-off-white,
+.light-mode .text-\[var\(--color-off-white\)\],
+.light-mode .text-\[\#F5F5F5\] {
+  color: #1A1A1A !important;
+}
+
+/* Muted/gray text - MUCH DARKER for better readability */
+.light-mode .text-concrete,
+.light-mode .text-\[var\(--color-concrete\)\] {
+  color: #333333 !important;
+}
+
+/* Border overrides - MORE VISIBLE */
+.light-mode .border-\[\#333\],
+.light-mode .border-\[\#333333\],
+.light-mode .border-concrete\/20,
+.light-mode [class*="border-concrete"] {
+  border-color: #D0D0D0 !important;
+}
+
+/* Card borders - VISIBLE PRE-HOVER */
+.light-mode .border-white\/10,
+.light-mode [class*="border-white/10"] {
+  border-color: #D0D0D0 !important;
+}
+
+/* Experience cards and hover boxes - visible borders pre-hover */
+.light-mode .group.relative.bg-white\/\[0\.02\] {
+  background-color: #FFFFFF !important;
+  border-color: #D0D0D0 !important;
+}
+
+.light-mode .group.relative.bg-white\/\[0\.02\]:hover {
+  border-color: var(--color-brand-orange) !important;
+}
+
+/* Badges/pills - visible borders */
+.light-mode .bg-white\/5,
+.light-mode [class*="bg-white/5"] {
+  background-color: #F0F0F0 !important;
+  border-color: #C0C0C0 !important;
+}
+
+/* Footer specific */
+.light-mode footer {
+  background-color: #EBEBEB !important;
+  border-color: #DDDDDD !important;
+}
+
+.light-mode footer .text-\[var\(--color-concrete\)\] {
+  color: #444444 !important;
+}
+
+.light-mode footer a:hover {
+  color: #1A1A1A !important;
+}
+
+/* Header logo */
+.light-mode header .logo,
+.light-mode header .logo a,
+.light-mode header .text-\[\#F5F5F5\] {
+  color: #1A1A1A !important;
+}
+
+.light-mode header .nav-link {
+  color: #1A1A1A !important;
+}
+
+/* Mobile hamburger menu button */
+.light-mode #mobile-menu-btn,
+.light-mode header .text-\[var\(--color-off-white\)\] {
+  color: #1A1A1A !important;
+}
+
+/* Mobile menu overlay */
+.light-mode #mobile-menu {
+  background-color: #F5F5F5 !important;
+}
+
+.light-mode #mobile-menu .mobile-link {
+  color: #1A1A1A !important;
+}
+
+.light-mode #close-menu-btn {
+  color: #1A1A1A !important;
+}
+
+/* Cards and interactive elements - VISIBLE BORDERS */
+.light-mode .group.block {
+  background-color: #FFFFFF !important;
+  border-color: #D0D0D0 !important;
+}
+
+.light-mode .group.block:hover {
+  border-color: var(--color-brand-orange) !important;
+}
+
+/* Section backgrounds with patterns */
+.light-mode section.bg-bedrock {
+  background-color: #F5F5F5 !important;
+}
+
+/* Form inputs */
+.light-mode input,
+.light-mode textarea,
+.light-mode select {
+  background-color: #FFFFFF !important;
+  color: #1A1A1A !important;
+  border-color: #D0D0D0 !important;
+}
+
+.light-mode input::placeholder,
+.light-mode textarea::placeholder {
+  color: #666666 !important;
+}
+
+/* Keep hero text light (over images) - DO NOT OVERRIDE */
+/* .light-mode .hero-text - deliberately not overriding */
+
+/* ============================================
+   LIGHT MODE: PAGE-SPECIFIC OVERRIDES
+   For Research, Resume, About-Me pages
+   ============================================ */
+
+/* Gray text colors - make them darker in light mode */
+.light-mode .text-gray-300 {
+  color: #333333 !important;
+}
+
+.light-mode .text-gray-400 {
+  color: #444444 !important;
+}
+
+.light-mode .text-gray-500 {
+  color: #555555 !important;
+}
+
+/* Card backgrounds - make visible in light mode */
+.light-mode .bg-white\/5,
+.light-mode [class*="bg-white/5"] {
+  background-color: #F0F0F0 !important;
+}
+
+.light-mode .bg-white\/10,
+.light-mode [class*="bg-white/10"] {
+  background-color: #E8E8E8 !important;
+}
+
+/* Card borders - make visible in light mode */
+.light-mode .border-white\/10,
+.light-mode [class*="border-white/10"] {
+  border-color: #D0D0D0 !important;
+}
+
+.light-mode .border-white\/20,
+.light-mode [class*="border-white/20"] {
+  border-color: #C0C0C0 !important;
+}
+
+/* Nested role cards in resume */
+.light-mode .border-l.border-white\/10 {
+  border-color: #D0D0D0 !important;
+}
+
+/* Skills badges */
+.light-mode .bg-white\/5.text-gray-300 {
+  background-color: #E8E8E8 !important;
+  color: #333333 !important;
+}
+
+/* Publication type badges */
+.light-mode .border-\[var\(--color-brand-orange\)\]\/30 {
+  border-color: var(--color-brand-orange) !important;
+}
+
+/* About page dark sections */
+.light-mode .bg-\[\#1A1A1A\] {
+  background-color: #FFFFFF !important;
+}
+
+.light-mode section.bg-\[\#1A1A1A\] {
+  background-color: #EBEBEB !important;
+  border-color: #D0D0D0 !important;
+}
+
+/* Prose in about page */
+.light-mode .prose-invert {
+  --tw-prose-body: #333333;
+  --tw-prose-headings: #1A1A1A;
+}
+
+.light-mode .prose.prose-invert.text-concrete {
+  color: #333333 !important;
+}
+
+.light-mode .prose.prose-invert p {
+  color: #333333 !important;
+}
+
+/* Neutral backgrounds used in about sections */
+.light-mode .bg-neutral-900 {
+  background-color: #FFFFFF !important;
+  border-color: #D0D0D0 !important;
+}
+
+.light-mode .bg-neutral-800 {
+  background-color: #F5F5F5 !important;
+}
+
+/* Through Line section boxes */
+.light-mode .p-6.border.border-concrete\/20.bg-\[\#1A1A1A\] {
+  background-color: #FFFFFF !important;
+  border-color: #D0D0D0 !important;
+}
+
+/* Form container in contact */
+.light-mode .bg-neutral-900.border.border-concrete\/20 {
+  background-color: #FFFFFF !important;
+  border-color: #D0D0D0 !important;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-concrete);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-orange);
+}
+
+.light-mode ::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+  background: #CCCCCC;
+}
+
+.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-orange);
+}
+
+/* Custom Orange Cursor - Desktop Only */
+@media (min-width: 768px) and (pointer: fine) {
+
+  *,
+  *::before,
+  *::after {
+    cursor: url('/cursors/pointer-orange.svg') 5 0, auto;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  .cursor-pointer,
+  [onclick],
+  summary {
+    cursor: url('/cursors/pointer-orange.svg') 5 0, pointer;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+
+  /* White cursor for orange elements (better contrast) */
+  .bg-brand-orange,
+  .bg-brand-orange *,
+  [class*="bg-brand-orange"] {
+    cursor: url('/cursors/pointer-white.svg') 5 0, auto !important;
+  }
+
+  .bg-brand-orange a,
+  .bg-brand-orange button,
+  .bg-brand-orange [role="button"],
+  [class*="bg-brand-orange"] a,
+  [class*="bg-brand-orange"] button,
+  [class*="bg-brand-orange"] [role="button"] {
+    cursor: url('/cursors/pointer-white.svg') 5 0, pointer !important;
+  }
+}

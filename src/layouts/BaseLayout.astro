@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import DepthGauge from '../components/global/DepthGauge.svelte';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Marshall Schurtz - Founder, Archaeologist, Storyteller, Strategist" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+		
+		<!-- Theme Initialization (prevent flash) -->
+		<script is:inline>
+			// Initialize theme immediately to prevent flash
+			(function() {
+				const savedTheme = localStorage.getItem('theme');
+				const isDark = savedTheme !== 'light';
+				
+				if (isDark) {
+					document.documentElement.classList.add('dark-mode');
+					document.documentElement.classList.remove('light-mode');
+				} else {
+					document.documentElement.classList.add('light-mode');
+					document.documentElement.classList.remove('dark-mode');
+				}
+			})();
+		</script>
+	</head>
+	<body class="overflow-x-hidden selection:bg-[var(--color-brand-orange)] selection:text-white">
+		<DepthGauge client:load />
+		<Header />
+		
+		<div class="site-wrapper min-h-screen flex flex-col pt-20">
+			<main class="flex-grow">
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>

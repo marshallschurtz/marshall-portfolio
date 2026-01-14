@@ -1,0 +1,71 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+}
+
+const { 
+  href, 
+  variant = 'primary', 
+  type = 'button',
+  class: className,
+  target
+} = Astro.props;
+
+const baseStyles = "relative inline-flex items-center gap-2 px-6 py-3 font-mono text-sm uppercase tracking-wider transition-all duration-300 ease-out group overflow-hidden border";
+const variants = {
+  primary: "border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-bedrock",
+  secondary: "border-concrete text-concrete hover:border-off-white hover:text-off-white"
+};
+
+const styles = `${baseStyles} ${variants[variant]} ${className || ''}`;
+---
+
+{
+  href ? (
+    <a href={href} class={styles} target={target}>
+      <span class="relative z-10 flex items-center gap-2">
+        <slot />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          class="transition-transform duration-300 group-hover:translate-x-1"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </span>
+    </a>
+  ) : (
+    <button type={type} class={styles}>
+      <span class="relative z-10 flex items-center gap-2">
+        <slot />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          class="transition-transform duration-300 group-hover:translate-x-1"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </span>
+    </button>
+  )
+}

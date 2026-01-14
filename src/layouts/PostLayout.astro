@@ -1,0 +1,66 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { urlFor } from '../lib/sanity';
+import { PortableText } from 'astro-portabletext';
+
+const { post } = Astro.props;
+
+const formatDate = (dateString: string) => {
+  if (!dateString) return 'Unknown Date';
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<BaseLayout title={`${post.title} | Marshall Schurtz`} description={post.title}>
+  <article class="pt-24 min-h-screen">
+    <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+      
+      {/* Header */}
+      <div class="mb-12 text-center">
+        <span class="text-brand-orange font-mono text-xs tracking-widest uppercase block mb-4">
+          FIELD NOTE // {formatDate(post.publishedAt)}
+        </span>
+        <h1 class="text-3xl md:text-5xl font-bold text-off-white mb-6 leading-tight">
+          {post.title}
+        </h1>
+        {post.author && (
+            <div class="font-mono text-xs text-concrete">
+                LOGGED BY: {post.author.toUpperCase()}
+            </div>
+        )}
+      </div>
+
+      {/* Main Image */}
+      {post.mainImage && (
+        <div class="mb-16 aspect-video w-full bg-neutral-900 overflow-hidden relative border border-concrete/20">
+          <img 
+            src={urlFor(post.mainImage).width(1200).height(800).url()} 
+            alt={post.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )}
+
+      {/* Content */}
+      <div class="prose prose-invert prose-lg max-w-none text-concrete font-light leading-relaxed prose-headings:text-off-white prose-a:text-brand-orange prose-blockquote:border-brand-orange prose-strong:text-off-white">
+        <PortableText value={post.body} />
+      </div>
+
+      {/* Footer / Tags */}
+      {post.categories && post.categories.length > 0 && (
+        <div class="mt-16 pt-8 border-t border-concrete/20 flex gap-2">
+            {post.categories.map(cat => (
+                 <span class="text-[10px] font-mono border border-concrete/30 px-2 py-1 text-concrete">
+                     #{cat}
+                 </span>
+            ))}
+        </div>
+      )}
+
+    </div>
+  </article>
+</BaseLayout>

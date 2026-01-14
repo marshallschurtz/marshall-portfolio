@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getExcavations, urlFor } from '../../../lib/sanity';
+
+export async function getStaticPaths() {
+  const excavations = await getExcavations();
+  return excavations.map((excavation) => ({
+    params: { slug: excavation.slug.current },
+    props: { excavation },
+  }));
+}
+
+const { excavation } = Astro.props;
+
+// Prepare meta
+const title = `${excavation.title} | Marshall Schurtz Research`;
+const description = excavation.description || `Fieldwork and excavation details for ${excavation.title}`;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container mx-auto px-4 py-12 md:py-24">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Back Link -->
+      <a href="/research" class="inline-flex items-center gap-2 text-sm font-mono text-gray-500 hover:text-[var(--color-brand-orange)] transition-colors mb-8">
+        ← BACK TO RESEARCH
+      </a>
+
+      <!-- Header -->
+      <div class="mb-12">
+        <p class="text-sm font-mono text-[var(--color-brand-orange)] mb-3 uppercase tracking-wider">
+           {excavation.siteName ? `${excavation.siteName} • ` : ''} EXCAVATION PROJECT
+        </p>
+        <h1 class="text-3xl md:text-5xl font-sans font-medium text-[var(--color-off-white)] mb-6">
+          {excavation.title}
+        </h1>
+        
+        {excavation.seasons && (
+            <div class="flex flex-wrap gap-2 mb-6">
+                {excavation.seasons.map((season) => (
+                    <span class="px-3 py-1 bg-white/10 text-sm font-mono rounded text-gray-300">
+                        {season}
+                    </span>
+                ))}
+            </div>
+        )}
+      </div>
+
+      <!-- Main Image -->
+      {excavation.mainImage && (
+        <div class="mb-12 rounded-lg overflow-hidden border border-white/10">
+          <img 
+            src={urlFor(excavation.mainImage).width(1200).url()} 
+            alt={excavation.mainImage.alt || excavation.title}
+            class="w-full h-auto"
+          />
+        </div>
+      )}
+
+      <!-- Content Grid -->
+      <div class="grid md:grid-cols-3 gap-12">
+        
+        <!-- Left: Key Data -->
+        <div class="md:col-span-1 space-y-8">
+            {excavation.location && (
+                <div>
+                   <h3 class="text-sm font-mono text-[var(--color-brand-orange)] mb-2 uppercase">Location</h3>
+                   <p class="text-gray-300 font-mono text-sm">
+                     {excavation.location.lat.toFixed(4)}, {excavation.location.lng.toFixed(4)}
+                   </p>
+                   {/* Fallback map link if we don't have a map component yet */}
+                   <a 
+                     href={`https://www.google.com/maps/search/?api=1&query=${excavation.location.lat},${excavation.location.lng}`}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="text-xs text-gray-500 hover:text-white underline mt-1 block"
+                   >
+                     View on Google Maps
+                   </a>
+                </div>
+            )}
+
+            {excavation.officialLink && (
+                 <div>
+                   <h3 class="text-sm font-mono text-[var(--color-brand-orange)] mb-2 uppercase">Official Project</h3>
+                   <a 
+                     href={excavation.officialLink}
+                     target="_blank"
+                     class="text-gray-300 hover:text-white text-sm break-words border-b border-gray-700 hover:border-white transition-colors"
+                   >
+                     Visit Website →
+                   </a>
+                 </div>
+            )}
+        </div>
+
+        <!-- Right: Description & Logic -->
+        <div class="md:col-span-2">
+            
+            <!-- Description -->
+            <div class="prose prose-invert max-w-none text-gray-300 mb-12">
+                 <!-- If we had PortableText component we'd use it here. For now falling back to description/text or basic rendering -->
+                 {excavation.fullDescription ? (
+                     // Placeholder for PortableText - assuming user might need setup for this
+                     <p class="italic text-gray-500">[Fieldwork details content would render here via PortableText]</p>
+                 ) : (
+                    <p class="whitespace-pre-wrap leading-relaxed">{excavation.description}</p>
+                 )}
+            </div>
+
+            <!-- My Work / Related Items -->
+            {excavation.myWork && excavation.myWork.length > 0 && (
+                <div class="border-t border-white/10 pt-8 mt-8">
+                    <h3 class="text-xl font-sans text-[var(--color-off-white)] mb-6">Related Work & Publications</h3>
+                    <ul class="space-y-4">
+                        {excavation.myWork.map((item) => (
+                            <li class="bg-white/5 p-4 rounded border border-white/5 hover:border-white/20 transition-colors">
+                                {/* This logic depends on what 'item' structure is coming back from groq. 
+                                    Since we didn't expand references in the query, we might just get refs.
+                                    For now simplified.
+                                */}
+                                <span class="text-gray-300 text-sm">
+                                   {item._type === 'reference' ? ' Referenced Item (Update Query to expand)' : (item.title || 'Related Item')}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
+
+      </div>
+
+      <!-- Simple Gallery Grid -->
+      {excavation.gallery && excavation.gallery.length > 0 && (
+         <div class="mt-16 pt-16 border-t border-white/10">
+            <h3 class="text-xl font-sans text-[var(--color-off-white)] mb-8">Field Gallery</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                 {excavation.gallery.map((image) => (
+                     <div class="aspect-square bg-black/40 rounded overflow-hidden">
+                        <img 
+                          src={urlFor(image).width(400).height(400).fit('crop').url()}
+                          alt={image.alt || 'Field photo'}
+                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                     </div>
+                 ))}
+            </div>
+         </div>
+      )}
+
+    </div>
+  </div>
+</BaseLayout>

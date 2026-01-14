@@ -1,0 +1,24 @@
+{
+  "name": "marshallschurtz-site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^7.2.5",
+    "@sanity/client": "^7.14.0",
+    "@sanity/image-url": "^2.0.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.9",
+    "astro-portabletext": "^0.13.0",
+    "gsap": "^3.14.2",
+    "sharp": "^0.34.5",
+    "svelte": "^5.46.3",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  }
+}

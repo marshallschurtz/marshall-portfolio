@@ -1,0 +1,118 @@
+---
+const highlights = [
+  {
+    company: "Merakiva Travel",
+    title: "Founder & Chief Tour Guide",
+    date: "2023 – Present",
+    type: "founder",
+    description: "Created an archaeology-focused travel company from the ground up, managing everything from brand identity to leading group expeditions."
+  },
+  {
+    company: "Sweathead",
+    title: "Head of Operations & Learning Product",
+    date: "2021 – Present",
+    type: "ops",
+    description: "Leading global operations, digital product strategy, and enterprise sales for a global training community of strategists."
+  },
+  {
+    company: "Always Sunny Tour",
+    title: "Founder",
+    date: "2023 – Present",
+    type: "founder",
+    description: "Created Philadelphia's top-rated tour about the cult-favorite show, <em>It's Always Sunny in Philadelphia</em>."
+  },
+  {
+    company: "2U",
+    title: "Product Strategy Manager",
+    date: "2022 – 2023",
+    type: "strategy",
+    description: "Developed data-backed business strategies and pricing models for a portfolio of online university programs."
+  }
+];
+
+const icons = {
+  founder: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+  ops: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+  strategy: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 7m0 13V7m0 0L9 4" /></svg>`
+};
+---
+
+<section class="py-24 bg-bedrock relative overflow-hidden">
+  <!-- Decorative Grid Overlay (Subtle) -->
+  <div class="absolute inset-0 bg-[url('/assets/grid-pattern.svg')] bg-repeat opacity-[0.03] pointer-events-none"></div>
+
+  <div class="container mx-auto px-4 md:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="flex items-center gap-4 mb-16">
+      <span class="w-2 h-2 bg-brand-orange"></span>
+      <h2 class="font-mono text-sm tracking-[0.2em] text-brand-orange uppercase">
+        // Professional Experience
+      </h2>
+      <div class="h-px bg-brand-orange/30 flex-grow"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Left side: Narrative/Visual -->
+      <div class="lg:col-span-4">
+        <h3 class="text-3xl md:text-4xl font-sans font-medium text-off-white mb-6 leading-tight">
+          Bridging <span class="text-brand-orange italic">archaeology</span>, strategy, and storytelling.
+        </h3>
+        <p class="text-concrete mb-8 font-mono text-sm leading-relaxed">
+          My work combines archaeological research with business strategy, content creation, and immersive travel experiences. Whether mapping ancient trade routes or building modern brands, I focus on uncovering patterns and telling stories that resonate.
+        </p>
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 text-xs font-mono text-concrete/60 uppercase">
+             <span class="w-8 h-px bg-concrete/20"></span>
+             Key Capabilities
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {["Strategic Planning", "Content Creation", "Travel Design", "Archaeological Research", "Digital Marketing", "Storytelling"].map(skill => (
+              <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-concrete uppercase">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Highlights -->
+      <div class="lg:col-span-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {highlights.map((item) => (
+            <div class="group relative bg-white/[0.02] border border-white/10 p-6 hover:bg-white/[0.04] hover:border-brand-orange/50 transition-all duration-300">
+              <!-- Type Icon Float -->
+              <div class="absolute top-6 right-6 text-brand-orange/30 group-hover:text-brand-orange transition-colors">
+                <Fragment set:html={icons[item.type]} />
+              </div>
+
+              <span class="font-mono text-[10px] text-brand-orange/60 uppercase tracking-widest mb-1 block">
+                {item.date}
+              </span>
+              <h4 class="text-xl font-bold text-off-white mb-1 group-hover:text-brand-orange transition-colors">
+                {item.company}
+              </h4>
+              <p class="text-xs font-mono text-concrete uppercase tracking-tight mb-4 border-b border-white/5 pb-4">
+                {item.title}
+              </p>
+              <p class="text-sm text-concrete leading-relaxed" set:html={item.description}></p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-8 flex justify-end">
+          <a 
+            href="/resume" 
+            class="group inline-flex items-center gap-3 text-brand-orange font-mono text-sm uppercase tracking-[0.2em] hover:gap-5 transition-all text-right"
+          >
+            See all professional experience
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

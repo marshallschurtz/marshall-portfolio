@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  class?: string;
+}
+
+const { label, value, class: className } = Astro.props;
+---
+
+<div class:list={["font-mono flex flex-col gap-1", className]}>
+  <span class="text-xs text-concrete uppercase tracking-wider">{label}</span>
+  <span class="text-sm text-brand-orange uppercase">{value}</span>
+</div>
