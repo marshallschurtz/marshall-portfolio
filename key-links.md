@@ -2,7 +2,7 @@
 GitHub Repo = "https://github.com/marshallschurtz/marshall-portfolio"
 Sanity Studio = "https://marshall-portfolio.sanity.studio/"
 Vercel Dashboard = "https://vercel.com/marshallschurtz"
-Production Site = "[Add after Vercel deployment]"
+Production Site = "marshallschurtz.com"
 
 # Business 
 Merakiva Travel = "https://merakivatravel.com"
@@ -11,7 +11,7 @@ Archaeolist = "https://archaeolist.com"
 Marshall Schurtz YouTube Channel = "https://youtube.com/@MarshallSchurtz"
 Sweathead = "sweathead.com"
 LinkedIn = "https://www.linkedin.com/in/marshallschurtz/"
-Instagram = "https://www.instagram.com/marshall_schurtz/"
+Instagram = "https://www.instagram.com/marshallschurtz/"
 
 
 

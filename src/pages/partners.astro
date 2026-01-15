@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getVideoStats } from '../lib/youtube';
+
+// Page Metadata
+const pageTitle = "Marshall Schurtz | Brand Partnerships & Media Kit";
+const pageDescription = "PhD Archaeologist & Travel Creator. Partner with a credibility-first channel reaching an affluent, educated audience.";
+const lastUpdated = "January 2026";
+
+// YouTube Video IDs to Feature
+const videoIds = [
+  '1ispFw7z-jY', // Riyadh Metro
+  'D2ixseA9C4Q', // Iberia Business
+  'cEvHUw2DgkA'  // Carthage Harbor
+];
+
+// Content Data (Static)
+const upcomingProjects = [
+  { date: 'Feb 2026', title: 'Tren Maya Documentary', desc: 'First expert-led doc of Mexico\'s complete loop.' },
+  { date: 'Mar 2026', title: 'Lagash Archaeological Dig', desc: 'Exclusive access to active excavation in Iraq.' },
+  { date: 'Apr 2026', title: 'William the Conqueror by Bike', desc: '500-mile cycling journey tracing history.' }
+];
+
+// Fetch dynamic stats with fallback
+let videoStats = [];
+try {
+  videoStats = await getVideoStats(videoIds);
+} catch (e) {
+  console.error("Failed to fetch brand page stats", e);
+}
+
+// Fallback data if API fails or for static build
+const videoData = {
+  '1ispFw7z-jY': { title: "I rode every line on Riyadh's BRAND NEW Metro ($23 Billion)", views: "135K+", thumb: "https://img.youtube.com/vi/1ispFw7z-jY/maxresdefault.jpg", subtext: "Infrastructure + Transit" },
+  'D2ixseA9C4Q': { title: "Is this really the best Business Class deal to Europe? (Iberia A350)", views: "45K+", thumb: "https://img.youtube.com/vi/D2ixseA9C4Q/maxresdefault.jpg", subtext: "Premium Travel" },
+  'cEvHUw2DgkA': { title: "I explored an EMPTY Roman city (Uthina, Tunisia 🇹🇳 )", views: "30K+", thumb: "https://img.youtube.com/vi/cEvHUw2DgkA/maxresdefault.jpg", subtext: "Archaeological Exploration" }
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  
+  <!-- PRINT STYLES -->
+  <style is:global>
+    @media print {
+      header, footer, .no-print { display: none !important; }
+      body { background-color: #fff !important; color: #000 !important; }
+      .print-only { display: block !important; }
+      .page-break { page-break-before: always; }
+      a[href]:after { content: " (" attr(href) ")"; }
+      section { break-inside: avoid; padding-top: 2rem !important; padding-bottom: 2rem !important; }
+    }
+    .print-only { display: none; }
+  </style>
+
+  <!-- SECTION 1: HERO -->
+  <section class="min-h-[70vh] flex items-center bg-bedrock relative overflow-hidden pt-32 pb-12">
+    <!-- Grid Background -->
+    <div class="absolute inset-0 bg-[url('/assets/grid-pattern.svg')] opacity-5 pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+        
+        <!-- Text Content -->
+        <div class="flex flex-col justify-center h-full pt-4">
+          <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-off-white mb-6 leading-tight uppercase">
+            PhD Archaeologist.<br/>
+            Travel Creator.<br/>
+            <span class="text-brand-orange">First to the Story.</span>
+          </h1>
+          
+          <p class="text-lg md:text-xl text-concrete font-light leading-relaxed mb-10 max-w-xl">
+            I create infrastructure and travel documentaries with genuine expertise — and audiences who take action.
+          </p>
+
+          <!-- Proof Badges -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 text-sm font-mono text-off-white/80 w-full">
+            <div class="flex items-center gap-3 p-3 border border-concrete/20 bg-neutral-900/50 w-full">
+              <span class="text-2xl">🎓</span>
+              <span>PhD Archaeology <span class="text-concrete block text-xs">University of Pennsylvania, 2022</span></span>
+            </div>
+            <div class="flex items-center gap-3 p-3 border border-concrete/20 bg-neutral-900/50 w-full">
+              <span class="text-2xl">📺</span>
+              <span>135,000+ Views <span class="text-concrete block text-xs">on breakout video (Riyadh Metro)</span></span>
+            </div>
+            <div class="flex items-center gap-3 p-3 border border-concrete/20 bg-neutral-900/50 w-full sm:col-span-2 lg:col-span-1 xl:col-span-2">
+              <span class="text-2xl">🚀</span>
+              <span>First Creator <span class="text-concrete block text-xs">to cover complete Riyadh Metro system</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="relative mt-8 lg:mt-0">
+             <div class="bg-neutral-900 border border-concrete/20 relative overflow-hidden group">
+              <img 
+                src="/assets/partners/hero-marshall.png" 
+                alt="Marshall Schurtz" 
+                class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              />
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: POSITIONING -->
+  <section class="py-16 bg-[#1A1A1A] border-y border-concrete/10">
+    <div class="container mx-auto px-4 md:px-8 max-w-4xl text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-off-white leading-relaxed">
+        "Most travel creators show you places. I show you why they matter."
+      </h2>
+      <div class="w-24 h-1 bg-brand-orange mx-auto my-8"></div>
+      <p class="text-lg md:text-xl text-concrete leading-relaxed font-light">
+        As a working archaeologist with exclusive access to sites like the Lagash excavation in Iraq, I bring credibility that transfers to brand partners. My content lives at the intersection of infrastructure, archaeology, and exploration travel — and reaches an audience of well-spending travelers and documentary enthusiasts who click, engage, and convert.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: AUDIENCE DATA -->
+  <section class="py-20 bg-bedrock">
+    <div class="container mx-auto px-4 md:px-8">
+      
+      <div class="flex items-center justify-between mb-12">
+        <h3 class="text-2xl font-bold text-off-white uppercase flex items-center gap-3">
+          <span class="w-2 h-2 bg-brand-orange"></span> Audience Data
+        </h3>
+        <span class="text-xs font-mono text-concrete space-x-2">
+           <span>UPDATED: {lastUpdated}</span>
+           <span class="text-brand-orange">● LIVE SUBSCRIBER COUNT</span>
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Demographics -->
+        <div class="p-6 border border-concrete/20 bg-neutral-900/30">
+          <h4 class="font-mono text-brand-orange text-xs uppercase tracking-widest mb-6 border-b border-concrete/10 pb-2"> // Demographics</h4>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between text-sm text-off-white mb-2"><span>Male</span> <span>94%</span></div>
+              <div class="h-2 bg-concrete/20 w-full rounded-full overflow-hidden"><div class="h-full bg-brand-orange" style="width: 94%"></div></div>
+            </div>
+             <div>
+              <div class="flex justify-between text-sm text-off-white mb-2"><span>Female</span> <span>6%</span></div>
+              <div class="h-2 bg-concrete/20 w-full rounded-full overflow-hidden"><div class="h-full bg-brand-orange" style="width: 6%"></div></div>
+            </div>
+            <div class="pt-4 border-t border-concrete/10">
+              <p class="font-mono text-brand-orange text-xs uppercase tracking-widest mb-4"> // Primary Ages</p>
+              <div class="space-y-3">
+                <!-- 25-34 -->
+                <div class="space-y-1">
+                  <div class="flex justify-between text-xs text-off-white"><span>25-34</span> <span class="font-bold">40%</span></div>
+                  <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange" style="width: 40%"></div></div>
+                </div>
+                <!-- 35-44 -->
+                <div class="space-y-1">
+                  <div class="flex justify-between text-xs text-concrete"><span>35-44</span> <span>24%</span></div>
+                  <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange opacity-60" style="width: 24%"></div></div>
+                </div>
+                 <!-- 18-24 -->
+                <div class="space-y-1">
+                 <div class="flex justify-between text-xs text-concrete"><span>18-24</span> <span>16%</span></div>
+                 <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange opacity-40" style="width: 16%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geography -->
+        <div class="p-6 border border-concrete/20 bg-neutral-900/30">
+          <h4 class="font-mono text-brand-orange text-xs uppercase tracking-widest mb-6 border-b border-concrete/10 pb-2"> // Geography</h4>
+          <div class="space-y-4">
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs text-concrete"><span>Saudi Arabia</span> <span>22.1%</span></div>
+              <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange" style="width: 22.1%"></div></div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs text-concrete"><span>United States</span> <span>20.1%</span></div>
+              <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange" style="width: 20.1%"></div></div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs text-concrete"><span>United Kingdom</span> <span>8.1%</span></div>
+              <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange" style="width: 8.1%"></div></div>
+            </div>
+             <div class="space-y-1">
+              <div class="flex justify-between text-xs text-concrete"><span>India</span> <span>4.8%</span></div>
+              <div class="h-1.5 bg-concrete/20 w-full"><div class="h-full bg-brand-orange" style="width: 4.8%"></div></div>
+            </div>
+          </div>
+          
+          <div class="mt-8 pt-6 border-t border-concrete/10">
+             <h4 class="font-mono text-brand-orange text-xs uppercase tracking-widest mb-4"> // Interests</h4>
+             <ul class="text-sm text-off-white space-y-2 list-disc list-inside text-concrete">
+               <li>Documentary & Nonfiction</li>
+               <li>Travel Enthusiasts</li>
+               <li>Transit & Infrastructure</li>
+               <li>History & Archaeology</li>
+             </ul>
+          </div>
+        </div>
+
+        <!-- Engagement -->
+         <div class="p-6 border border-concrete/20 bg-neutral-900/30 flex flex-col justify-between">
+          <div>
+            <h4 class="font-mono text-brand-orange text-xs uppercase tracking-widest mb-6 border-b border-concrete/10 pb-2"> // Engagement</h4>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-bedrock p-3 border border-concrete/10">
+                <div class="text-2xl font-bold text-off-white">1.4K+</div>
+                <div class="text-[10px] uppercase text-concrete tracking-wider">Subscribers</div>
+              </div>
+              <div class="bg-bedrock p-3 border border-concrete/10">
+                <div class="text-2xl font-bold text-off-white">3:26</div>
+                <div class="text-[10px] uppercase text-concrete tracking-wider">Avg Watch Time</div>
+              </div>
+              <div class="bg-bedrock p-3 border border-concrete/10">
+                <div class="text-2xl font-bold text-off-white">33%</div>
+                <div class="text-[10px] uppercase text-concrete tracking-wider">Avg % Viewed</div>
+              </div>
+              <div class="bg-bedrock p-3 border border-concrete/10">
+                <div class="text-2xl font-bold text-off-white">11%</div>
+                <div class="text-[10px] uppercase text-concrete tracking-wider">Returning</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-brand-orange/10 p-4 border border-brand-orange/20">
+            <p class="text-brand-orange text-sm font-bold mb-1">HIGH CLICK-THROUGH</p>
+            <p class="text-xs text-concrete">"I rode every line on Riyadh's Metro" generated <span class="text-off-white font-bold">500+ link clicks</span> to partner sites.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: FEATURED CONTENT -->
+  <section class="py-20 bg-[#1A1A1A] border-y border-concrete/10">
+    <div class="container mx-auto px-4 md:px-8">
+      
+       <div class="flex items-center gap-4 mb-12">
+        <span class="w-2 h-2 bg-brand-orange"></span>
+        <h3 class="text-2xl font-bold text-off-white uppercase">Featured Content</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {videoIds.map(id => {
+          const apiData = videoStats.find(v => v.id === id);
+          const fallback = videoData[id as keyof typeof videoData];
+          const display = {
+            title: apiData?.title || fallback.title,
+            views: apiData ? parseInt(apiData.viewCount).toLocaleString() : fallback.views,
+            thumb: apiData?.thumbnail || fallback.thumb,
+            subtext: fallback.subtext
+          };
+
+          return (
+            <a href={`https://www.youtube.com/watch?v=${id}`} target="_blank" class="group block relative bg-bedrock text-left border border-concrete/20 hover:border-brand-orange transition-colors">
+              <div class="aspect-video relative overflow-hidden">
+                <img src={display.thumb} alt={display.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-grayscale duration-500" />
+                <div class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 text-xs font-mono text-brand-orange border border-brand-orange/30">
+                  {display.views} VIEWS
+                </div>
+              </div>
+              <div class="p-5">
+                <div class="text-xs font-mono text-concrete uppercase tracking-wider mb-2">{display.subtext}</div>
+                <h4 class="text-off-white font-bold leading-snug group-hover:text-brand-orange transition-colors line-clamp-2">{display.title}</h4>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <div class="mt-12 max-w-3xl mx-auto text-center border p-6 border-concrete/20 bg-bedrock">
+        <p class="text-concrete italic">
+          "My videos are evergreen. The Riyadh Metro video gained 46,000 views in its first week and continues growing today. I create search-optimized content that generates views for years, not days."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: CONTENT FORMATS -->
+  <section class="py-20 bg-bedrock">
+    <div class="container mx-auto px-4 md:px-8">
+      <h3 class="font-mono text-brand-orange text-xs uppercase tracking-widest mb-12 text-center">// What I Create</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { title: "Challenge Docs", desc: "Complete system rides, multi-day routes, complex logistical feats." },
+          { title: "Infrastructure", desc: "Transit systems, megaprojects, urban development stories." },
+          { title: "Premium Travel", desc: "Business class reviews, hotel features, gear deep-dives." },
+          { title: "Archaeology", desc: "Site visits with expert commentary and historical storytelling." }
+        ].map(item => (
+          <div class="p-6 border border-concrete/20 bg-neutral-900/20 hover:bg-neutral-900/40 transition-colors">
+            <h4 class="text-off-white font-bold uppercase mb-3">{item.title}</h4>
+            <p class="text-sm text-concrete">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: PARTNERSHIP OPTIONS -->
+  <section class="py-20 bg-[#1A1A1A] border-y border-concrete/10">
+    <div class="container mx-auto px-4 md:px-8">
+      <h3 class="text-2xl font-bold text-off-white uppercase mb-12 text-center">Partnership Opportunities</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        
+        <!-- Option 1 -->
+        <div class="p-8 border border-concrete/20 bg-bedrock flex flex-col">
+          <h4 class="text-xl font-bold text-brand-orange mb-2">Integrated Mention</h4>
+          <p class="text-sm text-concrete mb-6 uppercase tracking-wider">Natural Narrative Integration</p>
+          <p class="text-off-white/90 mb-6 flex-grow">
+            Your product or service appears as part of the story, not an interruption. I weave your brand into the travel or historical context authentically.
+          </p>
+          <ul class="text-sm text-concrete space-y-2 mb-8">
+            <li class="flex items-center gap-2"><span class="text-brand-orange">✓</span> On-screen mention & usage</li>
+            <li class="flex items-center gap-2"><span class="text-brand-orange">✓</span> Link in description (top line)</li>
+            <li class="flex items-center gap-2"><span class="text-brand-orange">✓</span> Pinned comment</li>
+          </ul>
+          <div class="mt-auto pt-6 border-t border-concrete/10 text-xs text-concrete center">
+            Best for: Gear, apps, travel services
+          </div>
+        </div>
+
+        <!-- Option 2 -->
+        <div class="p-8 border border-concrete/20 bg-bedrock flex flex-col">
+          <h4 class="text-xl font-bold text-brand-orange mb-2">Ad-Break Sponsorship</h4>
+          <p class="text-sm text-concrete mb-6 uppercase tracking-wider">Dedicated Segment</p>
+          <p class="text-off-white/90 mb-6 flex-grow">
+            A dedicated 30-60 second focused segment within the video. High production value, custom script, and clear call-to-action.
+          </p>
+          <ul class="text-sm text-concrete space-y-2 mb-8">
+            <li class="flex items-center gap-2"><span class="text-brand-orange">✓</span> 30-60s dedicated slot</li>
+            <li class="flex items-center gap-2"><span class="text-brand-orange">✓</span> Custom visuals and talking points</li>
+            <li class="flex items-center gap-2"><span class="text-brand-orange">✓</span> Link in description</li>
+          </ul>
+          <div class="mt-auto pt-6 border-t border-concrete/10 text-xs text-concrete center">
+             Best for: Larger campaigns, software, insurance
+          </div>
+        </div>
+
+      </div>
+
+      <div class="max-w-5xl mx-auto mt-8 p-6 border border-dashed border-concrete/30 bg-neutral-900/30 text-center">
+        <h5 class="text-off-white font-bold uppercase mb-2">Hotels & Tours: Coverage Exchange</h5>
+        <p class="text-concrete text-sm">
+          Complimentary stay or experience in exchange for video feature + raw UGC assets for your marketing use.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 7: WHAT YOU GET -->
+  <section class="py-20 bg-bedrock">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+        {[
+          ["PhD Credibility", "Expertise, not fluff."],
+          ["Production Value", "4K, pro audio, cinematic."],
+          ["Evergreen", "Searchable for years."],
+          ["Action-Takers", "Audience clicks & buys."],
+          ["UGC Assets", "Raw files for you."]
+        ].map(([title, sub]) => (
+          <div class="p-4">
+            <div class="text-brand-orange text-xl mb-2">✓</div>
+            <div class="font-bold text-off-white text-sm uppercase mb-1">{title}</div>
+            <div class="text-xs text-concrete">{sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: UPCOMING -->
+  <section class="py-20 bg-[#1A1A1A] border-t border-concrete/10">
+    <div class="container mx-auto px-4 md:px-8">
+      <h3 class="font-mono text-concrete text-xs uppercase tracking-widest mb-12 text-center">On The Horizon</h3>
+      
+      <div class="max-w-3xl mx-auto space-y-8">
+        {upcomingProjects.map((project, i) => (
+          <div class="flex gap-6 relative group">
+            {i !== upcomingProjects.length -1 && <div class="absolute left-[5.5rem] top-8 bottom-[-2rem] w-px bg-concrete/20 group-hover:bg-brand-orange/50 transition-colors"></div>}
+            <div class="w-24 font-mono text-sm text-brand-orange shrink-0 pt-1 text-right">{project.date}</div>
+            <div class="w-3 h-3 rounded-full bg-bedrock border border-brand-orange shrink-0 mt-2 z-10"></div>
+            <div>
+              <h4 class="text-off-white font-bold text-lg uppercase">{project.title}</h4>
+              <p class="text-concrete font-light">{project.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer / Contact -->
+  <footer class="py-24 bg-bedrock border-t border-concrete/20 text-center relative z-10">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-off-white mb-8 uppercase">Let's Work Together</h2>
+      
+      <a href="mailto:marshall@merakivatravel.com" class="text-2xl md:text-4xl text-brand-orange font-mono hover:text-white transition-colors border-b-2 border-brand-orange/30 hover:border-brand-orange pb-1">
+        marshall@merakivatravel.com
+      </a>
+
+      <div class="flex justify-center gap-8 mt-12 text-sm text-concrete uppercase tracking-widest">
+        <a href="https://youtube.com/@marshallschurtz" class="hover:text-brand-orange transition-colors">YouTube</a>
+        <a href="https://instagram.com/marshallschurtz" class="hover:text-brand-orange transition-colors">Instagram</a>
+      </div>
+
+      <p class="mt-8 text-xs text-concrete/50">
+        Partnerships managed via Merakiva Travel Inc.
+      </p>
+
+      <button onclick="window.print()" class="mt-16 bg-transparent border border-concrete/30 text-concrete px-6 py-3 rounded-sm text-xs font-mono uppercase tracking-widest hover:border-brand-orange hover:text-brand-orange transition-all no-print">
+        Download Media Kit (PDF)
+      </button>
+
+      <!-- Print Footer -->
+      <div class="print-only mt-12 pt-12 border-t border-gray-200 text-center text-xs text-gray-500">
+        Generated from marshallschurtz.com/partners on {new Date().toLocaleDateString()}
+      </div>
+    </div>
+  </footer>
+
+</BaseLayout>

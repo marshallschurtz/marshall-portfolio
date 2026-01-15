@@ -20,6 +20,45 @@ function parseDuration(duration: string): number {
     return hours * 3600 + minutes * 60 + seconds;
 }
 
+export interface VideoStats {
+    id: string;
+    title: string;
+    viewCount: string;
+    likeCount: string;
+    thumbnail: string;
+}
+
+export async function getVideoStats(videoIds: string[]): Promise<VideoStats[]> {
+    if (!API_KEY) {
+        console.warn("YouTube API Key missing");
+        return [];
+    }
+
+    const idsParam = videoIds.join(',');
+    const url = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${idsParam}&part=snippet,statistics`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.error) {
+            console.error("YouTube Videos API Error:", data.error);
+            return [];
+        }
+
+        return data.items.map((item: any) => ({
+            id: item.id,
+            title: item.snippet.title,
+            viewCount: item.statistics.viewCount,
+            likeCount: item.statistics.likeCount,
+            thumbnail: item.snippet.thumbnails.maxres?.url || item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url,
+        }));
+    } catch (error) {
+        console.error("Failed to fetch video stats:", error);
+        return [];
+    }
+}
+
 export async function getLatestVideos(maxResults: number = 6): Promise<Video[]> {
     if (!API_KEY || !CHANNEL_ID) {
         console.warn("YouTube API Key or Channel ID missing");
