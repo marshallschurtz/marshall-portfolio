@@ -24,7 +24,7 @@
   }
 </script>
 
-<section class="py-20 bg-bedrock border-b border-concrete/20 relative">
+<section id="youtube" class="py-20 bg-bedrock border-b border-concrete/20 relative">
   <div class="container mx-auto px-4 md:px-8">
     
     <!-- Section Header (Parallel) -->

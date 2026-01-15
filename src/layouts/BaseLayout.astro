@@ -4,6 +4,8 @@ import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import DepthGauge from '../components/global/DepthGauge.svelte';
 
+import RuinsWidget from '../components/global/RuinsWidget.svelte';
+
 interface Props {
 	title: string;
 	description?: string;
@@ -21,6 +23,16 @@ const { title, description = "Marshall Schurtz - Founder, Archaeologist, Storyte
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
+		
+		<!-- Google Tag Manager -->
+		<script is:inline>
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-P77FGGC');
+		</script>
+		<!-- End Google Tag Manager -->
 		
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +57,14 @@ const { title, description = "Marshall Schurtz - Founder, Archaeologist, Storyte
 		</script>
 	</head>
 	<body class="overflow-x-hidden selection:bg-[var(--color-brand-orange)] selection:text-white">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P77FGGC"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
 		<DepthGauge client:load />
+
+		<RuinsWidget client:load />
 		<Header />
 		
 		<div class="site-wrapper min-h-screen flex flex-col pt-20">

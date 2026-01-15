@@ -34,8 +34,13 @@
       
       let rawHeaders = Array.from(h2Elements).map((h2) => {
         const element = h2 as HTMLElement;
+        // Calculate the absolute position relative to the document
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const absoluteTop = rect.top + scrollTop;
+        
         // Calculate the scroll position as a percentage of total scrollable area
-        const scrollPosition = element.offsetTop / documentHeight;
+        const scrollPosition = absoluteTop / documentHeight;
         return {
           text: cleanHeaderText(h2.textContent || ''),
           scrollPercent: Math.min(Math.max(scrollPosition, 0), 1)
@@ -83,18 +88,30 @@
       });
     };
 
-    setTimeout(collectHeaders, 300);
+    // Initial collection
+    collectHeaders();
+    updateScroll();
     
-    window.addEventListener('scroll', updateScroll);
-    window.addEventListener('resize', () => {
+    // Observer for body size changes (content loading)
+    const resizeObserver = new ResizeObserver(() => {
+        collectHeaders();
+        updateScroll();
+    });
+    resizeObserver.observe(document.body);
+    
+    // Named handler for resize to ensure proper removal
+    const handleResize = () => {
       collectHeaders();
       updateScroll();
-    });
-    updateScroll();
+    };
+
+    window.addEventListener('scroll', updateScroll);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('scroll', updateScroll);
-      window.removeEventListener('resize', collectHeaders);
+      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
     };
   });
 </script>

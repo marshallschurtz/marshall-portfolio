@@ -42,7 +42,7 @@ const pageDescription = "Get in touch for collaborations, speaking engagements, 
 
         {/* Form */}
         <div class="bg-neutral-900 border border-concrete/20 p-8">
-           <form class="space-y-6" action="#" method="POST" data-netlify="true" name="contact">
+           <form id="contact-form" class="space-y-6" action="#" method="POST" data-netlify="true" name="contact">
              <div>
                <label for="name" class="block font-mono text-xs text-brand-orange uppercase mb-2">Name</label>
                <input type="text" id="name" name="name" class="w-full bg-[#1A1A1A] border border-concrete/20 text-off-white p-3 focus:border-brand-orange focus:outline-none transition-colors" placeholder="Your Name" required />
@@ -65,4 +65,20 @@ const pageDescription = "Get in touch for collaborations, speaking engagements, 
 
     </div>
   </section>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', () => {
+        // Push event to dataLayer
+        // @ts-ignore
+        window.dataLayer = window.dataLayer || [];
+        // @ts-ignore
+        window.dataLayer.push({
+          'event': 'form_submit',
+          'form_id': 'contact-form'
+        });
+      });
+    }
+  </script>
 </BaseLayout>
